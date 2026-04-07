@@ -1,0 +1,146 @@
+.bloom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.hero-banner {
+  background-color: #d4e8d4;     /* verde claro como en la imagen */
+  border-radius: 20px;
+  padding: 40px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 500px;
+}
+
+.bloom-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin: 0;
+  color: #1a1a1a;
+}
+
+.hero-subtitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 10px 0 15px 0;
+  color: #333;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.search-bar {
+  display: flex;
+  background: white;
+  border-radius: 50px;
+  padding: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  max-width: 420px;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 50px;
+}
+
+.search-button {
+  background: #a8d5a8;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
+.happy-circle {
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+}
+
+.happy-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Sección Smartphone */
+.smartphone-section {
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.options-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.option-card {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  width: 220px;
+  padding: 30px 20px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.option-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.option-image {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.brand-logo {
+  max-height: 90px;
+  width: auto;
+}
+
+.option-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.ver-mas {
+  color: #4a8f4a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ver-mas:hover {
+  text-decoration: underline;
+}
