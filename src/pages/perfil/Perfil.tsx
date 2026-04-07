@@ -4,60 +4,42 @@ import "./Perfil.css";
 
 const Perfil: React.FC = () => {
   return (
-    <div className="start">
+    <div className="perfil">
 
       <Header /> {/* 👈 AQUÍ */}
 
-      <div className="start_card">
+      <div className="perfil_card">
 
         {/* LEFT */}
-        <div className="start_content">
+        <div className="perfil_content">
 
-          <h1 className="start_title">BloomMarket</h1>
-          <h2 className="start_subtitle">Mi Perfil</h2>
-          <div className = "container-text-start">
+          <h1 className="perfil_title">BloomMarket</h1>
+          <h2 className="perfil_subtitle">Mi Perfil</h2>
+          <div className = "container-text-perfil">
             <p>
-                El objetivo de este estudio es recolectar información
-                para reducir el impacto ambiental de la compra y venta
-                de smartphones.
+                <span>Usuario:</span> Usuario
             </p>
 
             <p>
-                En esta plataforma, puedes comprar smartphones
-                dependiendo del presupuesto que selecciones.
+                <span>Correo:</span> ejemplo@gmail.com
             </p>
 
             <p>
-                Además, contamos con una mascota.
-                Responde unas preguntas y ayúdala a crecer.
+                <span>Nivel de mi mascota:</span> 4
             </p>
 
-            <p className="start_label">
-                Por favor, selecciona una opción
-            </p>
           </div>
-          <div className = "start_presupuesto">
-            <div className="start_select">
-                <input 
-                type="text" 
-                placeholder="Estándar (900.000 - 1.800.000 COP)" 
-                readOnly
-                />
-                <button className="search-btn">
-                    <img src="/lupa.png" alt="buscar" />
-                </button>
-            </div>
-          </div>
-
-          <button className="start_btn">
-            Empezar →
-        </button>
+        
+        <div className = "botones-perfil">
+            <button className="btn-pag-principal">Ir a la página principal</button>
+            <button className="btn-cerrar">Cerrar sesión</button>
+        </div>
 
         </div>
 
         {/* RIGHT */}
-        <div className="image-section-start">
-          <div className="image-container-start">
+        <div className="image-section-perfil">
+          <div className="image-container-perfil">
             <img src="/flor.png" alt="flower" />
           </div>
         </div>
