@@ -1,0 +1,154 @@
+.cart-main {
+  padding: 120px 0 40px 0;
+  width: 100%;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.cart-container {
+  background: #b7c8b1;
+  border-radius: 20px;
+  padding: 40px;
+  margin: 0 auto 30px auto;
+
+  width: 80vw;
+  max-width: 1400px;
+}
+
+/* HEADER */
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.cart-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.cart-balance {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* CONTENIDO */
+.cart-content {
+  background: #f5f5f5;
+  border-radius: 16px;
+  min-height: 250px;
+  padding: 25px;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+/* CUANDO HAY PRODUCTOS */
+.cart-content--filled {
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER TIPO TABLA */
+.cart-table-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+/* LÍNEA DIVISORIA */
+.cart-divider {
+  height: 1px;
+  background: #ccc;
+  margin: 10px 0;
+}
+
+/* FILA */
+.cart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* IZQUIERDA (producto) */
+.cart-product {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* IMAGEN */
+.cart-product-image {
+  width: 70px;
+  height: 70px;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-product-image img {
+  width: 60%;
+  object-fit: contain;
+}
+
+/* INFO */
+.cart-product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-product-name {
+  font-weight: 600;
+}
+
+/* QUITAR */
+.cart-remove {
+  font-size: 0.85rem;
+  color: #555;
+  cursor: pointer;
+}
+
+.cart-remove:hover {
+  text-decoration: underline;
+}
+
+/* PRECIO */
+.cart-price {
+  font-weight: 500;
+}
+
+/* FOOTER */
+.cart-footer {
+  width: 80vw;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* BOTONES */
+.buy-btn {
+  background: #1c1c1c;
+  color: #b7c8b1;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.buy-btn:hover {
+  background: #333;
+}
+
+.back-btn {
+  border: none;
+  background: #e0e0e0;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
