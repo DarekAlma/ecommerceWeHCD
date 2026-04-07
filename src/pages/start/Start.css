@@ -1,0 +1,221 @@
+/* CONTENEDOR GENERAL */
+
+* {
+    margin: 0 ;
+    padding: 0;
+    font-family: Poppins;
+}
+
+.start {
+  height: 100vh;
+  width: 100vw;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 4rem;
+}
+
+/* CARD PRINCIPAL */
+.start_card {
+
+  background: #C8DCC1;
+  border-radius: 1.5rem;
+  width: 70%;
+  height: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* TEXTO IZQUIERDA */
+.start_content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2.5rem;
+}
+
+/* TITULOS */
+.start_title {
+  color: #000;
+  font-family: Poppins;
+  font-size: 2.2rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 3rem; /* 100% */
+}
+
+.start_subtitle {
+  color:#1E1E1E;
+  font-family: Poppins;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+/* PARRAFOS */
+.start_content p {
+  font-size: 0.7rem;
+  line-height: 1rem;
+}
+
+/* LABEL */
+.start_label {
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 0.7rem;
+}
+
+.start_presupuesto {
+    margin-top: 0.5rem;
+    background-color: #ffffff;
+    border-radius: 0.8rem;
+}
+
+/* INPUT + BOTÓN */
+.start_select {
+  display: flex;
+  align-items: center;
+  margin: 0.3rem;
+}
+
+.start_select input {
+  flex: 1;
+  height: 2.2rem;
+  border-radius: 0.8rem;
+  border: none;
+  padding: 0 15px;
+  background: #ffffff;
+  font-size: 0.7rem;
+  width: 15rem;
+}
+
+/* BOTÓN LUPA */
+.start_select button {
+  height: 2.2rem;
+  width: 2.2rem;
+
+  border-radius: 0.7rem;
+  border: none;
+
+  background: #C8DCC1;
+  cursor: pointer;
+  font-size: 16px;
+
+  transition: 0.2s;
+}
+
+.start_select button:hover {
+  background: #cfdac8;
+}
+
+/* IMAGEN DERECHA */
+.start_image {
+  flex: 1;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.start_image img {
+  width: 320px;
+}
+
+/* BOTÓN INFERIOR */
+.start_btn {
+
+  padding: 12px 23px;
+  background: #1E1E1E;
+  color: #C8DCC1;
+  font-size: 0.7rem;
+
+  border: none;
+  border-radius: 12px;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.2s;
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.start_btn:hover {
+  background: #a9bca3;
+}
+
+.image-section-start {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.image-container-start {
+  border-radius: 12.5rem 12.5rem 1.5rem 12.5rem;
+  background: #1E1E1E;
+  height: 90%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 5rem;
+}
+
+@media (max-width: 1024px) {
+    .image-container-start {
+    height: 75%;
+    padding: 3rem;
+    }
+
+    .image-container-start img {
+        width: 100%;
+}
+}
+
+.image-container-start img {
+  width: 80%;
+}
+
+.container-text-start {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.3rem;
+}
+
+.search-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.search-btn {
+  height: 45px;
+  width: 45px;
+
+  margin-left: 10px;
+  border-radius: 12px;
+  border: none;
+
+  background: #dce5d8;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-btn img {
+  width: 18px;
+  height: 18px;
+}
