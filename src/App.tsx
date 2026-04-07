@@ -5,10 +5,9 @@ import Signup from "./pages/signup/Signup";
 import Header from "./components/header/Header";
 import Home from "./pages/Home/Home";
 import Product from "./pages/Product/Product";
-import Cart from "./pages/cart/Cart";
-
-
-
+import Cart from "./pages/Cart/Cart";
+import Perfil from "./pages/perfil/Perfil";
+import Start from "./pages/start/Start";
 
 function App() {
   return (
@@ -20,6 +19,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/product" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/start" element={<Start />} />
 
       </Routes>
     </Router>
