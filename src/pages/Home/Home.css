@@ -1,22 +1,52 @@
+/* Reset y fix para header fijo */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+.main-content {
+  padding: 80px 24px 0 24px;
+  min-height: 100vh;
+  width: 80vw;        /* ← ancho del viewport completo, ignora el padre */
+  box-sizing: border-box;
+  margin-top: 15%;
+}
+
+/* Esto asegura que el contenido no tape al header */
+.bloom-container {
+  padding-top: 80px;   /* ← Cambia según la altura real de tu header (70px + margen) */
+  min-height: 100vh;
+}
+
 .bloom-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
-
 .hero-banner {
-  background-color: #d4e8d4;     /* verde claro como en la imagen */
+  background-color: #d4e8d4;
   border-radius: 20px;
-  padding: 40px 50px;
+  padding: 0px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 60px;
   position: relative;
+  max-width: 100%;   /* ← antes era 1450px, ahora se adapta al contenedor */
+  
 }
 
 .hero-content {
   max-width: 500px;
+  padding-left: 50px;
+  padding-bottom: 50px;
+  padding-top: 30px;
 }
 
 .bloom-title {
@@ -67,9 +97,10 @@
   font-size: 1.4rem;
 }
 
+
 .happy-circle {
-  width: 180px;
-  height: 180px;
+  width: 220px;
+  height: 220px;
   flex-shrink: 0;
 }
 
@@ -87,6 +118,7 @@
 .section-title {
   font-size: 2.2rem;
   margin-bottom: 8px;
+  margin-top: -2%;
 }
 
 .section-subtitle {
@@ -94,20 +126,32 @@
   margin-bottom: 40px;
 }
 
+/* Reemplaza el .options-grid existente */
 .options-grid {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 100px;
   flex-wrap: wrap;
+  margin-bottom: 60px;
+  align-items: flex-start;
 }
 
+/* Agrega esto nuevo */
+.option-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
 .option-card {
   background: white;
   border: 1px solid #eee;
   border-radius: 16px;
   width: 220px;
-  padding: 30px 20px 20px;
-  text-align: center;
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
 }
 
@@ -129,10 +173,21 @@
   width: auto;
 }
 
+/* Agrega esto nuevo */
+.option-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 220px;
+  padding: 0 4px;
+}
+
+/* Reemplaza el .option-name existente */
 .option-name {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  margin: 10px 0;
+  margin: 0;
 }
 
 .ver-mas {
@@ -144,3 +199,4 @@
 .ver-mas:hover {
   text-decoration: underline;
 }
+
