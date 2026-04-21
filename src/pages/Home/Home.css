@@ -15,7 +15,7 @@ html, body {
   min-height: 100vh;
   width: 80vw;        /* ← ancho del viewport completo, ignora el padre */
   box-sizing: border-box;
-  margin-top: 13rem;
+  margin-top: 2rem;
 }
 
 /* Esto asegura que el contenido no tape al header */
