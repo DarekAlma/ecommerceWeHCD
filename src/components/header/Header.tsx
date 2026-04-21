@@ -1,10 +1,10 @@
 import React from "react";
 import "./Header.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header: React.FC = () => {
-
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <header className="header">
@@ -21,21 +21,22 @@ const Header: React.FC = () => {
       {/* CENTER - NAV */}
       <nav className="header__nav">
         <span 
-          className="header__link active"
+          className={`header__link ${location.pathname === "/home" ? "active" : ""}`}
           onClick={() => navigate("/home")}
         >
           Home
         </span>
 
         <span 
-          className="header__link"
+          className={`header__link ${location.pathname === "/product" ? "active" : ""}`}
           onClick={() => navigate("/product")}
         >
           Productos
         </span>
 
-        <span className="header__link"
-        onClick={() => navigate("/survey")}
+        <span 
+          className={`header__link ${location.pathname.startsWith("/survey") ? "active" : ""}`}
+          onClick={() => navigate("/survey")}
         >
           Mascota
         </span>
