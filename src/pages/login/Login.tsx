@@ -96,7 +96,7 @@ const Login: React.FC = () => {
 
               <p className="signup-text">
                 ¿No tienes cuenta? <br />
-                <span onClick={() => navigate("/registro")}>
+                <span onClick={() => navigate("/signup")}>
                   Regístrate aquí
                 </span>
               </p>
