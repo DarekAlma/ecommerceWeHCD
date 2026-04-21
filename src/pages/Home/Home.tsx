@@ -1,14 +1,26 @@
-import React from "react";
+// HOME.tsx
+
+import React, { useState } from "react";
 import "./Home.css";
 import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
+import PresupuestoSelector from "../../components/presupuestoselector/PresupuestoSelector";
 
 const Home: React.FC = () => {
   const location = useLocation();
 
-  const presupuestoSeleccionado =
+  const presupuestoInicial =
     location.state?.presupuesto ||
+    localStorage.getItem("presupuesto") ||
     "Estándar (900.000 - 1.800.000 COP)";
+
+  const [presupuestoSeleccionado, setPresupuestoSeleccionado] =
+    useState(presupuestoInicial);
+
+  const cambiarPresupuesto = (valor: string) => {
+    setPresupuestoSeleccionado(valor);
+    localStorage.setItem("presupuesto", valor);
+  };
 
   return (
     <>
@@ -17,24 +29,20 @@ const Home: React.FC = () => {
       <main className="main-content">
         {/* Banner principal */}
         <div className="hero-banner">
+
           <div className="hero-content">
             <h1 className="bloom-title">BloomMarket</h1>
             <h2 className="hero-subtitle">Semillero de HCD</h2>
+
             <p className="hero-description">
               Si lo deseas, puedes cambiar de presupuesto
             </p>
 
             <div className="search-bar">
-              <input
-                type="text"
+              <PresupuestoSelector
                 value={presupuestoSeleccionado}
-                readOnly
-                className="search-input"
+                onChange={cambiarPresupuesto}
               />
-
-              <button className="search-button">
-                🔍
-              </button>
             </div>
           </div>
 
@@ -45,11 +53,13 @@ const Home: React.FC = () => {
               className="happy-image"
             />
           </div>
+
         </div>
 
         {/* Sección Smartphone */}
         <div className="smartphone-section">
           <h2 className="section-title">Smartphone</h2>
+
           <p className="section-subtitle">
             Selecciona para filtrar tus opciones
           </p>
@@ -66,6 +76,7 @@ const Home: React.FC = () => {
                   />
                 </div>
               </div>
+
               <div className="option-footer">
                 <p className="option-name">Android</p>
                 <a href="#" className="ver-mas">Ver más</a>
@@ -82,6 +93,7 @@ const Home: React.FC = () => {
                   />
                 </div>
               </div>
+
               <div className="option-footer">
                 <p className="option-name">iPhone</p>
                 <a href="#" className="ver-mas">Ver más</a>
@@ -98,6 +110,7 @@ const Home: React.FC = () => {
                   />
                 </div>
               </div>
+
               <div className="option-footer">
                 <p className="option-name">Modular</p>
                 <a href="#" className="ver-mas">Ver más</a>

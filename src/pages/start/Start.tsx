@@ -1,3 +1,5 @@
+// START.tsx
+
 import React, { useState } from "react";
 import Header from "../../components/header/Header";
 import "./Start.css";
@@ -8,10 +10,13 @@ const Start: React.FC = () => {
   const navigate = useNavigate();
 
   const [seleccionado, setSeleccionado] = useState(
+    localStorage.getItem("presupuesto") ||
     "Estándar (900.000 - 1.800.000 COP)"
   );
 
   const handleEmpezar = () => {
+    localStorage.setItem("presupuesto", seleccionado);
+
     navigate("/home", {
       state: {
         presupuesto: seleccionado

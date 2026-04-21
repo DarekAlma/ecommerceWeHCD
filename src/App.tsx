@@ -14,6 +14,7 @@ import Product from "./pages/Product/Product";
 import Cart from "./pages/Cart/Cart";
 import Perfil from "./pages/perfil/Perfil";
 import Start from "./pages/start/Start";
+import Error from "./pages/error/Error";
 
 import { escucharSesion } from "./firebase/auth";
 
@@ -125,6 +126,21 @@ function App() {
             <RutaProtegida>
               <Perfil />
             </RutaProtegida>
+          }
+        />
+
+        {/* Error visible para todos */}
+        <Route path="/error" element={<Error />} />
+
+        {/* Ruta inexistente */}
+        <Route
+          path="*"
+          element={
+            <Navigate
+              to="/error"
+              state={{ codigo: "404" }}
+              replace
+            />
           }
         />
 

@@ -28,3 +28,33 @@
 .opcion-presupuesto:hover {
   background: #f3f3f3;
 }
+
+.search-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.search-btn {
+  height: 45px;
+  width: 45px;
+
+  margin-left: 10px;
+  border-radius: 12px;
+  border: none;
+
+  background: #dce5d8;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.start_presupuesto {
+    padding: 0.1rem;
+}
