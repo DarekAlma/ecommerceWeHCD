@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
+import ProductoSemilla from "./pages/productoSemilla/ProductoSemilla"; //
 import Home from "./pages/Home/Home";
 import Product from "./pages/Product/Product";
 import Cart from "./pages/Cart/Cart";
@@ -16,6 +17,10 @@ import Perfil from "./pages/perfil/Perfil";
 import Start from "./pages/start/Start";
 import Error from "./pages/error/Error";
 import AdminProfile from "./pages/adminProfile/AdminProfile";
+import ProductoTallo from "./pages/productoTallo/productoTallo";  
+import ProductoFlor from "./pages/productoFlor/productoFlor";
+
+
 import SurveyFlow from "./pages/survey/SurveyFlow";
 
 import { escucharSesion } from "./firebase/auth";
@@ -134,6 +139,33 @@ function App() {
             </RutaProtegida>
           }
         />
+
+        <Route
+          path="/productosemilla"
+          element={
+            <RutaProtegida>
+              <ProductoSemilla />  
+            </RutaProtegida>
+          }
+        />
+
+        <Route
+          path="/productotallo"
+          element={
+            <RutaProtegida>
+              <ProductoTallo />  {/* ← mayúscula */}
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/productoflor"
+          element={
+            <RutaProtegida>
+              <ProductoFlor />  {/* ← mayúscula */}
+            </RutaProtegida>
+          }
+        />
+
 
         <Route
           path="/product"
