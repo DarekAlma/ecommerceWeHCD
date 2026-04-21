@@ -20,23 +20,26 @@
   width: 100%;
   max-width: 900px;
   overflow: hidden;
+  margin-top: 6rem;
 }
 
 /* Inner flex row */
 .sf-inner {
   display: flex;
   align-items: stretch;
-  min-height: 320px;
+  width: 100%;
+  min-height: 380px;
 }
 
 /* Left content */
 .sf-content {
   flex: 1;
   padding: 44px 44px 44px 44px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 14px;
+  gap: 25px;
 }
 
 .sf-content--wide {
@@ -133,7 +136,7 @@
 .sf-question {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 15px;
 }
 
 .sf-question-label {
@@ -206,11 +209,16 @@
 
 .sf-blob {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 420px;
+  height: 320px;
   background: #1a1a1a;
-  border-radius: 50%;
-  right: -60px;
+
+  /* 🔥 forma tipo Figma */
+  border-radius: 160px 0 0 160px;
+
+  right: -120px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .sf-mascot-img {
