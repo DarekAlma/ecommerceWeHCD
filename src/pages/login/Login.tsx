@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { iniciarSesion } from "../../firebase/auth";
-import { auth } from "../../firebase/config";
-import { sendPasswordResetEmail } from "firebase/auth";
+import { iniciarSesion } from "../../firebase/auth"; // ajusta ruta si cambia
 import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
@@ -26,7 +24,7 @@ const Login: React.FC = () => {
 
       await iniciarSesion(email, password);
 
-      navigate("/start");
+      navigate("/start"); // cambia la ruta si quieres otra página
     } catch (error: any) {
       console.error(error);
 
@@ -41,29 +39,6 @@ const Login: React.FC = () => {
       }
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleForgotPassword = async () => {
-    setMensajeError("");
-
-    if (!email) {
-      setMensajeError("Escribe tu correo primero");
-      return;
-    }
-
-    try {
-      await sendPasswordResetEmail(auth, email);
-
-      alert("Revisa tu correo para restablecer tu contraseña");
-    } catch (error: any) {
-      if (error.code === "auth/user-not-found") {
-        setMensajeError("No existe una cuenta con ese correo");
-      } else if (error.code === "auth/invalid-email") {
-        setMensajeError("Correo inválido");
-      } else {
-        setMensajeError("No se pudo enviar el correo");
-      }
     }
   };
 
@@ -102,13 +77,7 @@ const Login: React.FC = () => {
 
             <div className="container-forgot">
               <div className="container-mini-forgot">
-                <p
-                  className="forgot"
-                  onClick={handleForgotPassword}
-                  style={{ cursor: "pointer" }}
-                >
-                  ¿Olvidaste tu contraseña?
-                </p>
+                <p className="forgot">¿Olvidaste tu contraseña?</p>
               </div>
 
               {mensajeError && (
@@ -127,7 +96,7 @@ const Login: React.FC = () => {
 
               <p className="signup-text">
                 ¿No tienes cuenta? <br />
-                <span onClick={() => navigate("/signup")} style={{ cursor: "pointer" }}>
+                <span onClick={() => navigate("/registro")}>
                   Regístrate aquí
                 </span>
               </p>

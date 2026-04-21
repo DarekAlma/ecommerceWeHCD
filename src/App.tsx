@@ -14,6 +14,7 @@ import Product from "./pages/Product/Product";
 import Cart from "./pages/Cart/Cart";
 import Perfil from "./pages/perfil/Perfil";
 import Start from "./pages/start/Start";
+import AdminProfile from "./pages/adminProfile/AdminProfile";
 import Error from "./pages/error/Error";
 
 import { escucharSesion } from "./firebase/auth";
@@ -129,10 +130,20 @@ function App() {
           }
         />
 
-        {/* Error visible para todos */}
+        {/* ADMIN */}
+        <Route
+          path="/admin/profile"
+          element={
+            <RutaProtegida>
+              <AdminProfile />
+            </RutaProtegida>
+          }
+        />
+
+        {/* Error visible para autenticado o no */}
         <Route path="/error" element={<Error />} />
 
-        {/* Ruta inexistente */}
+        {/* Ruta no encontrada */}
         <Route
           path="*"
           element={

@@ -1,0 +1,108 @@
+.profile-main {
+  padding: 120px 0 40px 0;
+  width: 100%;
+}
+
+/* CONTENEDOR */
+.profile-container {
+  background: #b7c8b1;
+  border-radius: 20px;
+  width: 80vw;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* IZQUIERDA */
+.profile-info {
+  max-width: 500px;
+}
+
+.profile-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.profile-subtitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* DATOS */
+.profile-data p {
+  margin-bottom: 8px;
+  color: #2f2f2f;
+}
+
+.admin-text {
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* BOTONES */
+.profile-buttons {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 260px; /* 🔥 ancho fijo */
+}
+
+.main-btn {
+  background: #1c1c1c;
+  color: #b7c8b1;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%; /* 🔥 ocupa todo el ancho del contenedor */
+}
+
+.main-btn:hover {
+  background: #333;
+}
+
+.logout-btn {
+  background: #e57373;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+}
+
+.logout-btn:hover {
+  background: #d65c5c;
+}
+
+/* DERECHA */
+.profile-image {
+  width: 400px;
+  height: 400px;
+  background: #1c1c1c;
+  border-radius: 200px 200px 20px 200px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* 🔥 la pega abajo */
+
+  position: relative;
+  overflow: visible; /* permite sobresalir arriba/lados */
+}
+
+.profile-image img {
+  width: 70%; /* 🔥 más grande para que sobresalga */
+  object-fit: contain;
+
+  position: relative;
+  bottom: 0; /* 🔥 NO sobresale por abajo */
+}
