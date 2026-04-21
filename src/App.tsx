@@ -14,8 +14,8 @@ import Product from "./pages/Product/Product";
 import Cart from "./pages/Cart/Cart";
 import Perfil from "./pages/perfil/Perfil";
 import Start from "./pages/start/Start";
-import AdminProfile from "./pages/adminProfile/AdminProfile";
 import Error from "./pages/error/Error";
+import AdminProfile from "./pages/adminProfile/AdminProfile";
 
 import { escucharSesion } from "./firebase/auth";
 
@@ -49,6 +49,37 @@ function RutaPublica({ children }: { children: React.ReactNode }) {
   if (user === undefined) return <div>Cargando...</div>;
 
   return user ? <Navigate to="/start" replace /> : children;
+}
+
+/* SOLO ADMIN */
+function RutaAdmin({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<any>(undefined);
+
+  useEffect(() => {
+    const unsubscribe = escucharSesion((usuario) => {
+      setUser(usuario);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (user === undefined) return <div>Cargando...</div>;
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (user.email !== "admin@bloommarket.com") {
+    return (
+      <Navigate
+        to="/error"
+        state={{ codigo: "403" }}
+        replace
+      />
+    );
+  }
+
+  return children;
 }
 
 function App() {
@@ -130,20 +161,20 @@ function App() {
           }
         />
 
-        {/* ADMIN */}
+        {/* SOLO ADMIN */}
         <Route
           path="/admin/profile"
           element={
-            <RutaProtegida>
+            <RutaAdmin>
               <AdminProfile />
-            </RutaProtegida>
+            </RutaAdmin>
           }
         />
 
-        {/* Error visible para autenticado o no */}
+        {/* Error visible para todos */}
         <Route path="/error" element={<Error />} />
 
-        {/* Ruta no encontrada */}
+        {/* Ruta inexistente */}
         <Route
           path="*"
           element={
