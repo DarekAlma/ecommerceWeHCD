@@ -34,7 +34,9 @@ const Header: React.FC = () => {
           Productos
         </span>
 
-        <span className="header__link">
+        <span className="header__link"
+        onClick={() => navigate("/survey")}
+        >
           Mascota
         </span>
       </nav>

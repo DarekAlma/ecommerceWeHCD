@@ -16,6 +16,7 @@ import Perfil from "./pages/perfil/Perfil";
 import Start from "./pages/start/Start";
 import Error from "./pages/error/Error";
 import AdminProfile from "./pages/adminProfile/AdminProfile";
+import SurveyFlow from "./pages/survey/SurveyFlow";
 
 import { escucharSesion } from "./firebase/auth";
 
@@ -157,6 +158,15 @@ function App() {
           element={
             <RutaProtegida>
               <Perfil />
+            </RutaProtegida>
+          }
+        />
+
+        <Route
+          path="/survey"
+          element={
+            <RutaProtegida>
+              <SurveyFlow />
             </RutaProtegida>
           }
         />
