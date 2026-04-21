@@ -219,3 +219,37 @@
   width: 18px;
   height: 18px;
 }
+
+.opcion-presupuesto {
+  font-size: 0.65rem;
+}
+
+.start_presupuesto {
+  margin-top: 0.5rem;
+  background-color: #ffffff;
+  border-radius: 0.8rem;
+  position: relative;
+}
+
+.dropdown-presupuesto {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  z-index: 999;
+  overflow: hidden;
+}
+
+.opcion-presupuesto {
+  padding: 12px;
+  font-size: 0.65rem;
+  cursor: pointer;
+}
+
+.opcion-presupuesto:hover {
+  background: #f3f3f3;
+}

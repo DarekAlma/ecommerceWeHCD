@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/header/Header";
 import "./Start.css";
+import { useNavigate } from "react-router-dom";
+import PresupuestoSelector from "../../components/presupuestoselector/PresupuestoSelector";
 
 const Start: React.FC = () => {
+  const navigate = useNavigate();
+
+  const [seleccionado, setSeleccionado] = useState(
+    "Estándar (900.000 - 1.800.000 COP)"
+  );
+
+  const handleEmpezar = () => {
+    navigate("/home", {
+      state: {
+        presupuesto: seleccionado
+      }
+    });
+  };
+
   return (
     <div className="start">
 
-      <Header /> {/* 👈 AQUÍ */}
+      <Header />
 
       <div className="start_card">
 
@@ -15,43 +31,40 @@ const Start: React.FC = () => {
 
           <h1 className="start_title">BloomMarket</h1>
           <h2 className="start_subtitle">Semillero de HCD</h2>
-          <div className = "container-text-start">
+
+          <div className="container-text-start">
             <p>
-                El objetivo de este estudio es recolectar información
-                para reducir el impacto ambiental de la compra y venta
-                de smartphones.
+              El objetivo de este estudio es recolectar información
+              para reducir el impacto ambiental de la compra y venta
+              de smartphones.
             </p>
 
             <p>
-                En esta plataforma, puedes comprar smartphones
-                dependiendo del presupuesto que selecciones.
+              En esta plataforma, puedes comprar smartphones
+              dependiendo del presupuesto que selecciones.
             </p>
 
             <p>
-                Además, contamos con una mascota.
-                Responde unas preguntas y ayúdala a crecer.
+              Además, contamos con una mascota.
+              Responde unas preguntas y ayúdala a crecer.
             </p>
 
             <p className="start_label">
-                Por favor, selecciona una opción
+              Por favor, selecciona una opción
             </p>
           </div>
-          <div className = "start_presupuesto">
-            <div className="start_select">
-                <input 
-                type="text" 
-                placeholder="Estándar (900.000 - 1.800.000 COP)" 
-                readOnly
-                />
-                <button className="search-btn">
-                    <img src="/lupa.png" alt="buscar" />
-                </button>
-            </div>
-          </div>
 
-          <button className="start_btn">
-            Empezar  →
-        </button>
+          <PresupuestoSelector
+            value={seleccionado}
+            onChange={setSeleccionado}
+          />
+
+          <button
+            className="start_btn"
+            onClick={handleEmpezar}
+          >
+            Empezar →
+          </button>
 
         </div>
 
@@ -63,7 +76,6 @@ const Start: React.FC = () => {
         </div>
 
       </div>
-
 
     </div>
   );

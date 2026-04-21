@@ -52,7 +52,7 @@ const Header: React.FC = () => {
           src="/persona.png" 
           alt="usuario" 
           className="icon-img"
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/perfil")}
         />
       </div>
 

@@ -1,8 +1,15 @@
 import React from "react";
 import "./Home.css";
 import Header from "../../components/header/Header";
+import { useLocation } from "react-router-dom";
 
 const Home: React.FC = () => {
+  const location = useLocation();
+
+  const presupuestoSeleccionado =
+    location.state?.presupuesto ||
+    "Estándar (900.000 - 1.800.000 COP)";
+
   return (
     <>
       <Header />
@@ -18,11 +25,13 @@ const Home: React.FC = () => {
             </p>
 
             <div className="search-bar">
-              <input 
-                type="text" 
-                placeholder="Estándar (900.000 - 1.800.000 COP)" 
+              <input
+                type="text"
+                value={presupuestoSeleccionado}
+                readOnly
                 className="search-input"
               />
+
               <button className="search-button">
                 🔍
               </button>
@@ -30,59 +39,74 @@ const Home: React.FC = () => {
           </div>
 
           <div className="happy-circle">
-            <img 
-              src="/semilla.png" 
-              alt="Semilla" 
+            <img
+              src="/semilla.png"
+              alt="Semilla"
               className="happy-image"
             />
           </div>
         </div>
 
-{/* Sección Smartphone */}
-<div className="smartphone-section">
-  <h2 className="section-title">Smartphone</h2>
-  <p className="section-subtitle">Selecciona para filtrar tus opciones</p>
+        {/* Sección Smartphone */}
+        <div className="smartphone-section">
+          <h2 className="section-title">Smartphone</h2>
+          <p className="section-subtitle">
+            Selecciona para filtrar tus opciones
+          </p>
 
-  <div className="options-grid">
+          <div className="options-grid">
 
-    <div className="option-item">
-      <div className="option-card">
-        <div className="option-image">
-          <img src="/android.png" alt="Android" className="brand-logo" />
+            <div className="option-item">
+              <div className="option-card">
+                <div className="option-image">
+                  <img
+                    src="/android.png"
+                    alt="Android"
+                    className="brand-logo"
+                  />
+                </div>
+              </div>
+              <div className="option-footer">
+                <p className="option-name">Android</p>
+                <a href="#" className="ver-mas">Ver más</a>
+              </div>
+            </div>
+
+            <div className="option-item">
+              <div className="option-card">
+                <div className="option-image">
+                  <img
+                    src="/ios.png"
+                    alt="iOS"
+                    className="brand-logo"
+                  />
+                </div>
+              </div>
+              <div className="option-footer">
+                <p className="option-name">iPhone</p>
+                <a href="#" className="ver-mas">Ver más</a>
+              </div>
+            </div>
+
+            <div className="option-item">
+              <div className="option-card">
+                <div className="option-image">
+                  <img
+                    src="/fairphone.png"
+                    alt="Modular"
+                    className="brand-logo"
+                  />
+                </div>
+              </div>
+              <div className="option-footer">
+                <p className="option-name">Modular</p>
+                <a href="#" className="ver-mas">Ver más</a>
+              </div>
+            </div>
+
+          </div>
         </div>
-      </div>
-      <div className="option-footer">
-        <p className="option-name">Android</p>
-        <a href="#" className="ver-mas">Ver más</a>
-      </div>
-    </div>
 
-    <div className="option-item">
-      <div className="option-card">
-        <div className="option-image">
-          <img src="/ios.png" alt="iOS" className="brand-logo" />
-        </div>
-      </div>
-      <div className="option-footer">
-        <p className="option-name">iPhone</p>
-        <a href="#" className="ver-mas">Ver más</a>
-      </div>
-    </div>
-
-    <div className="option-item">
-      <div className="option-card">
-        <div className="option-image">
-          <img src="/fairphone.png" alt="Modular" className="brand-logo" />
-        </div>
-      </div>
-      <div className="option-footer">
-        <p className="option-name">Modular</p>
-        <a href="#" className="ver-mas">Ver más</a>
-      </div>
-    </div>
-
-  </div>
-</div>
       </main>
     </>
   );
