@@ -37,12 +37,15 @@ const ProductoSemilla: React.FC = () => {
       <main className="ps-main-content">
         {/* Banner principal */}
         <div className="ps-hero-banner">
+
           <div className="ps-hero-content">
             <h1 className="ps-bloom-title">BloomMarket</h1>
             <h2 className="ps-hero-subtitle">Semillero de HCD</h2>
+            
             <p className="ps-hero-description">
               Si lo deseas, puedes cambiar de presupuesto
             </p>
+            
             <div className="ps-search-bar">
               <PresupuestoSelector
                 value={presupuestoSeleccionado}
