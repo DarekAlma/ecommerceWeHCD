@@ -9,9 +9,10 @@ import { db } from "../../firebase/config";
 const Perfil: React.FC = () => {
   const navigate = useNavigate();
 
-  const [usuario, setUsuario] = useState("Usuario");
-  const [correo, setCorreo] = useState("ejemplo@gmail.com");
-  const [nivelMascota, setNivelMascota] = useState("4");
+  const [usuario, setUsuario] = useState<string>("");
+  const [correo, setCorreo] = useState<string>("");
+  const [nivelMascota, setNivelMascota] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true); 
 
   useEffect(() => {
     const unsubscribe = escucharSesion(async (user) => {
@@ -20,9 +21,9 @@ const Perfil: React.FC = () => {
         return;
       }
 
-      setCorreo(user.email || "Sin correo");
-
       try {
+        setCorreo(user.email || "Sin correo");
+
         const ref = doc(db, "usuarios", user.uid);
         const snap = await getDoc(ref);
 
@@ -34,6 +35,8 @@ const Perfil: React.FC = () => {
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false); // 🔥 clave
       }
     });
 
@@ -48,6 +51,18 @@ const Perfil: React.FC = () => {
   const handleInicio = () => {
     navigate("/home");
   };
+
+  // 🔥 pantalla de carga (evita placeholders)
+  if (loading) {
+    return (
+      <div className="perfil">
+        <Header />
+        <div style={{ paddingTop: "100px", textAlign: "center" }}>
+          Cargando perfil...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="perfil">
