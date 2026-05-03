@@ -1,7 +1,7 @@
 // ProductoSemilla.tsx
 
 import React, { useState } from "react";
-import "./ProductoSemilla.css";
+import "./productoSemilla.css";
 import Header from "../../components/header/Header";
 import { useLocation, useNavigate } from "react-router-dom";
 import PresupuestoSelector from "../../components/presupuestoselector/PresupuestoSelector";

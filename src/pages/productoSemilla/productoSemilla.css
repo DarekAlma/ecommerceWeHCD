@@ -1,5 +1,3 @@
-/* ProductoSemilla.css */
-/* Reset y fix para header fijo */
 * {
   margin: 0;
   padding: 0;
@@ -11,17 +9,26 @@ html, body {
   padding: 0;
   min-height: 100vh;
 }
-
-
-.ps-main-content {
+.main-content {
   padding: 80px 24px 0 24px;
   min-height: 100vh;
-  width: 80vw;
+  width: 80vw;        /* ← ancho del viewport completo, ignora el padre */
   box-sizing: border-box;
   margin-top: 2rem;
 }
 
-.ps-hero-banner {
+/* Esto asegura que el contenido no tape al header */
+.bloom-container {
+  padding-top: 80px;   /* ← Cambia según la altura real de tu header (70px + margen) */
+  min-height: 100vh;
+}
+
+.bloom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.hero-banner {
   background-color: #d4e8d4;
   border-radius: 20px;
   padding: 0px 30px;
@@ -30,46 +37,49 @@ html, body {
   justify-content: space-between;
   margin-bottom: 30px;
   position: relative;
-  max-width: 100%;
+  max-width: 100%;   /* ← antes era 1450px, ahora se adapta al contenedor */
+  
 }
 
-.ps-hero-content {
+.hero-content {
   max-width: 500px;
   padding-left: 25px;
   padding-bottom: 40px;
-  padding-top: 30px;}
+  padding-top: 30px;
+}
 
-.ps-bloom-title {
+.bloom-title {
   font-size: 2.2rem;
   font-weight: 900;
   margin: 0;
   color: #1a1a1a;
 }
 
-.ps-hero-subtitle {
+.hero-subtitle {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 10px 0 15px 0;
   color: #333;
 }
 
-.ps-hero-description {
-  font-size: 0.85rem;
+.hero-description {
+  font-size: 0.8rem;
   color: #555;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-.ps-happy-circle {
-  width: 180px;
-  height: 180px;
+.happy-circle {
+  width: 220px;
+  height: 220px;
   flex-shrink: 0;
 }
 
-.ps-happy-image {
+.happy-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
+
 
 /* Sección Smartphones */
 .ps-smartphone-section {
@@ -92,9 +102,11 @@ html, body {
 /* Grid de 4 cards */
 .ps-options-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(4, minmax(0, 160px));
+  gap: 32px;
   margin-bottom: 48px;
+  background: red; /* para ver el grid */
+  width: fit-content; /* que el grid no se estire */
 }
 
 .ps-option-item {
