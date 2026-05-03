@@ -105,8 +105,6 @@ html, body {
   grid-template-columns: repeat(4, minmax(0, 160px));
   gap: 32px;
   margin-bottom: 48px;
-  background: red; /* para ver el grid */
-  width: fit-content; /* que el grid no se estire */
 }
 
 .ps-option-item {
