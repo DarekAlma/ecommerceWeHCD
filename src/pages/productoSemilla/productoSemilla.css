@@ -99,19 +99,20 @@ html, body {
   margin-bottom: 32px;
 }
 
-/* Grid de 4 cards */
 .ps-options-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 160px));
-  gap: 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
   margin-bottom: 48px;
+  justify-content: flex-start;
 }
 
 .ps-option-item {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 18px;
 }
+
 
 
 .ps-option-card {
