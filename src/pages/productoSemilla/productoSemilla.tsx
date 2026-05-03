@@ -30,23 +30,23 @@ const ProductoSemilla: React.FC = () => {
     localStorage.setItem("presupuesto", valor);
   };
 
-  return (
+    return (
     <>
       <Header />
 
-      <main className="ps-main-content">
+      <main className="main-content">
         {/* Banner principal */}
-        <div className="ps-hero-banner">
+        <div className="hero-banner">
 
-          <div className="ps-hero-content">
-            <h1 className="ps-bloom-title">BloomMarket</h1>
-            <h2 className="ps-hero-subtitle">Semillero de HCD</h2>
-            
-            <p className="ps-hero-description">
+          <div className="hero-content">
+            <h1 className="bloom-title">BloomMarket</h1>
+            <h2 className="hero-subtitle">Semillero de HCD</h2>
+
+            <p className="hero-description">
               Si lo deseas, puedes cambiar de presupuesto
             </p>
-            
-            <div className="ps-search-bar">
+
+            <div className="search-bar">
               <PresupuestoSelector
                 value={presupuestoSeleccionado}
                 onChange={cambiarPresupuesto}
@@ -54,10 +54,16 @@ const ProductoSemilla: React.FC = () => {
             </div>
           </div>
 
-          <div className="ps-happy-circle">
-            <img src="/semilla.png" alt="Semilla" className="ps-happy-image" />
+          <div className="happy-circle">
+            <img
+              src="/semilla.png"
+              alt="Semilla"
+              className="happy-image"
+            />
           </div>
+
         </div>
+
 
         {/* Sección Smartphones */}
         <div className="ps-smartphone-section">
