@@ -1,53 +1,63 @@
 import React from "react";
 import "./AdminProfile.css";
-import Header from "../../components/header/Header";
+import HeaderAdmin from "../../components/headeradmin/HeaderAdmin";
 import { useNavigate } from "react-router-dom";
+import { cerrarSesion } from "../../firebase/auth"; // ✅ IMPORTANTE
 
 const AdminProfile: React.FC = () => {
 
   const navigate = useNavigate();
 
+  // ✅ FUNCIÓN LOGOUT REAL
+  const handleLogout = async () => {
+    await cerrarSesion();   // 🔥 CIERRA FIREBASE
+    navigate("/login");     // 🔥 REDIRECCIONA
+  };
+
   return (
     <>
-      <Header />
+      <HeaderAdmin />
 
-      <main className="profile-main">
+      <main className="profile-main-admin">
 
-        <div className="profile-container">
+        <div className="profile-container-admin">
 
           {/* IZQUIERDA */}
-          <div className="profile-info">
+          <div className="profile-info-admin">
 
-            <h1 className="profile-title">BloomMarket</h1>
-            <h2 className="profile-subtitle">Mi Perfil</h2>
+            <h1 className="profile-title-admin">BloomMarket</h1>
+            <h2 className="profile-subtitle-admin">Mi Perfil</h2>
 
-            <div className="profile-data">
+            <div className="profile-data-admin">
               <p><strong>Usuario:</strong> Admin</p>
               <p><strong>Correo:</strong> admin@gmail.com</p>
-              <p><strong>Nivel de mi mascota:</strong> 4</p>
-              <p className="admin-text">Tiene permisos de administrador</p>
+              <p className="admin-text-admin">Tiene permisos de administrador</p>
             </div>
 
-            <div className="profile-buttons">
+            <div className="profile-buttons-admin">
+
+              {/* 🔥 ADMIN HOME */}
               <button 
-                className="main-btn"
-                onClick={() => navigate("/home")}
+                className="main-btn-admin"
+                onClick={() => navigate("/admin/home")}
               >
                 Ir a la página principal
               </button>
 
+              {/* 🔥 LOGOUT REAL */}
               <button 
                 className="logout-btn"
-                onClick={() => navigate("/login")}
+                onClick={handleLogout}
               >
                 Cerrar sesión
               </button>
+
             </div>
 
           </div>
 
           {/* DERECHA */}
-          <div className="profile-image">
+          <div className="profile-image-admin">
             <img src="/flor.png" alt="perfil" />
           </div>
 

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
-import ProductoSemilla from "./pages/productoSemilla/ProductoSemilla"; //
+import ProductoSemilla from "./pages/productoSemilla/productoSemilla"; //
 import Home from "./pages/Home/Home";
 import Product from "./pages/Product/Product";
 import TestFirebase from "./TestFirebase";
@@ -20,7 +20,7 @@ import Error from "./pages/error/Error";
 import AdminProfile from "./pages/adminProfile/AdminProfile";
 import ProductoTallo from "./pages/productoTallo/productoTallo";  
 import ProductoFlor from "./pages/productoFlor/productoFlor";
-
+import AdminHome from "./pages/adminHome/AdminHome";
 
 import SurveyFlow from "./pages/survey/SurveyFlow";
 
@@ -55,9 +55,16 @@ function RutaPublica({ children }: { children: React.ReactNode }) {
 
   if (user === undefined) return <div>Cargando...</div>;
 
-  return user ? <Navigate to="/start" replace /> : children;
-}
+  if (user) {
+    if (user.email === "admin@bloommarket.com") {
+      return <Navigate to="/admin/home" replace />;
+    }
 
+    return <Navigate to="/start" replace />;
+  }
+
+  return children;
+}
 /* SOLO ADMIN */
 function RutaAdmin({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any>(undefined);
@@ -221,6 +228,15 @@ function App() {
           element={
             <RutaAdmin>
               <AdminProfile />
+            </RutaAdmin>
+          }
+        />
+
+        <Route
+          path="/admin/home"
+          element={
+            <RutaAdmin>
+              <AdminHome />
             </RutaAdmin>
           }
         />
