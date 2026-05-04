@@ -1,6 +1,7 @@
 // HOME.tsx
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
@@ -8,6 +9,11 @@ import PresupuestoSelector from "../../components/presupuestoselector/Presupuest
 
 const Home: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+const irAProductos = (marca: string) => {
+    navigate("/productosemilla", { state: { marca } });
+  };
 
   const presupuestoInicial =
     location.state?.presupuesto ||
@@ -79,7 +85,9 @@ const Home: React.FC = () => {
 
               <div className="option-footer">
                 <p className="option-name">Android</p>
-                <a href="#" className="ver-mas">Ver más</a>
+                <a href="#" className="ver-mas" onClick={(e) => { e.preventDefault(); irAProductos("Android"); }}>
+                  Ver más
+                </a>
               </div>
             </div>
 

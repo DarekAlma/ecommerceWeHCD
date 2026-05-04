@@ -12,6 +12,7 @@ import Signup from "./pages/signup/Signup";
 import ProductoSemilla from "./pages/productoSemilla/ProductoSemilla"; //
 import Home from "./pages/Home/Home";
 import Product from "./pages/Product/Product";
+import TestFirebase from "./TestFirebase";
 import Cart from "./pages/Cart/Cart";
 import Perfil from "./pages/perfil/Perfil";
 import Start from "./pages/start/Start";
@@ -103,6 +104,8 @@ function App() {
           }
         />
 
+    
+
         <Route
           path="/login"
           element={
@@ -127,6 +130,15 @@ function App() {
           element={
             <RutaProtegida>
               <Start />
+            </RutaProtegida>
+          }
+        />
+
+             <Route
+          path="/test"
+          element={
+            <RutaProtegida>
+              <TestFirebase />
             </RutaProtegida>
           }
         />
