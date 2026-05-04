@@ -1,51 +1,13 @@
-import React, { useState, useEffect } from "react";
-import "./AdminHome.css";
+import React, { useState } from "react";
+import "./AdminProductos.css";
 import HeaderAdmin from "../../components/headeradmin/HeaderAdmin";
-import { doc, setDoc, onSnapshot } from "firebase/firestore";
-import { db } from "../../firebase/config";
 
-const AdminHome: React.FC = () => {
+const AdminProductos: React.FC = () => {
+  const [visibilidad, setVisibilidad] = useState({ android: true, ios: true, modular: true });
 
-  // ✅ CAMBIO: ahora inicia en null (para evitar parpadeo)
-  const [visibilidad, setVisibilidad] = useState<{
-    android: boolean;
-    ios: boolean;
-    modular: boolean;
-  } | null>(null);
-
-  // ✅ TOGGLE (NO CAMBIA TU LÓGICA)
-  const toggleVisibilidad = async (key: "android" | "ios" | "modular") => {
-    if (!visibilidad) return;
-
-    const nuevoEstado = {
-      ...visibilidad,
-      [key]: !visibilidad[key],
-    };
-
-    setVisibilidad(nuevoEstado);
-
-    try {
-      await setDoc(doc(db, "configuracion", "visibilidad"), nuevoEstado);
-    } catch (error) {
-      console.error("Error guardando visibilidad:", error);
-    }
+  const toggleVisibilidad = (key: "android" | "ios" | "modular") => {
+    setVisibilidad((prev) => ({ ...prev, [key]: !prev[key] }));
   };
-
-  // ✅ ESCUCHA FIREBASE
-  useEffect(() => {
-    const docRef = doc(db, "configuracion", "visibilidad");
-
-    const unsubscribe = onSnapshot(docRef, (docSnap) => {
-      if (docSnap.exists()) {
-        setVisibilidad(docSnap.data() as any);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  // ✅ EVITA PARPADEO
-  if (!visibilidad) return null;
 
   return (
     <>
@@ -181,4 +143,4 @@ const AdminHome: React.FC = () => {
   );
 };
 
-export default AdminHome;
+export default AdminProductos;

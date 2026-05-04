@@ -30,7 +30,7 @@ const AdminProfile: React.FC = () => {
 
             <div className="profile-data-admin">
               <p><strong>Usuario:</strong> Admin</p>
-              <p><strong>Correo:</strong> admin@gmail.com</p>
+              <p><strong>Correo:</strong> admin@bloommarket.com</p>
               <p className="admin-text-admin">Tiene permisos de administrador</p>
             </div>
 

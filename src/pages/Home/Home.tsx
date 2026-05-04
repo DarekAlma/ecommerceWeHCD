@@ -5,6 +5,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./Home.css";
 import Header from "../../components/header/Header";
 import PresupuestoSelector from "../../components/presupuestoselector/PresupuestoSelector";
+import { useEffect } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
 const Home: React.FC = () => {
   const location = useLocation();
@@ -26,6 +29,24 @@ const Home: React.FC = () => {
     setPresupuestoSeleccionado(valor);
     localStorage.setItem("presupuesto", valor);
   };
+
+  const [visibilidad, setVisibilidad] = useState({
+    android: true,
+    ios: true,
+    modular: true,
+  });
+
+  useEffect(() => {
+  const docRef = doc(db, "configuracion", "visibilidad");
+
+  const unsubscribe = onSnapshot(docRef, (docSnap) => {
+    if (docSnap.exists()) {
+      setVisibilidad(docSnap.data() as any);
+    }
+  });
+
+  return () => unsubscribe();
+}, []);
 
   return (
     <>
@@ -60,6 +81,7 @@ const Home: React.FC = () => {
           <div className="options-grid">
 
             {/* Android → Samsung */}
+            {visibilidad.android && (
             <div className="option-item">
               <div className="option-card">
                 <div className="option-image">
@@ -80,8 +102,10 @@ const Home: React.FC = () => {
                 </a>
               </div>
             </div>
+            )}
 
             {/* iPhone → Apple */}
+            {visibilidad.ios && (
             <div className="option-item">
               <div className="option-card">
                 <div className="option-image">
@@ -102,8 +126,10 @@ const Home: React.FC = () => {
                 </a>
               </div>
             </div>
+            )}
 
             {/* Modular */}
+            {visibilidad.modular && (
             <div className="option-item">
               <div className="option-card">
                 <div className="option-image">
@@ -124,6 +150,7 @@ const Home: React.FC = () => {
                 </a>
               </div>
             </div>
+            )}
 
           </div>
         </div>
