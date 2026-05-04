@@ -23,11 +23,22 @@ const TestFirebase = () => {
   return (
     <div style={{ padding: "2rem", fontFamily: "monospace" }}>
       <h2>Celulares en Firebase ({datos.length})</h2>
-      {datos.map((d) => (
-        <pre key={d.id} style={{ background: "#f0f0f0", padding: "1rem", marginBottom: "1rem" }}>
-          {JSON.stringify(d, null, 2)}
-        </pre>
-      ))}
+     {datos.map((d) => (
+  <div key={d.id} style={{ marginBottom: "2rem" }}>
+    <pre style={{ background: "#f0f0f0", padding: "1rem" }}>
+      {JSON.stringify(d, null, 2)}
+    </pre>
+    {/* Prueba de imagen */}
+    {d.imagen && (
+      <img 
+        src={d.imagen} 
+        alt={d.modelo}
+        style={{ width: "200px", border: "2px solid red" }}
+        onError={(e) => (e.currentTarget.style.outline = "3px solid red")}
+      />
+    )}
+  </div>
+))}
     </div>
   );
 };

@@ -32,7 +32,7 @@ html, body {
 .hero-banner {
   background-color: #d4e8d4;
   border-radius: 20px;
-  padding: 0px 30px;
+  padding: 0px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,14 +45,14 @@ html, body {
 .hero-content {
   max-width: 500px;
   padding-left: 25px;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
   padding-top: 30px;
 }
 
 .bloom-title {
-  font-size: 2.2rem;
+  font-size: 1.7rem;
   font-weight: 900;
-  margin: 0;
+  margin-top: -5%;
   color: #1a1a1a;
 }
 
@@ -89,8 +89,8 @@ html, body {
 
 .ps-section-title {
   font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 11px;
+  margin-top: -4%;
   color: #1a1a1a;
 }
 
@@ -191,6 +191,11 @@ html, body {
   font-size: 0.9rem;
   white-space: nowrap;
   padding-top: 2px;
+  /* Quitar estilos de botón */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .ps-ver-mas:hover {

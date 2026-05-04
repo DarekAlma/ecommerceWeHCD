@@ -55,11 +55,8 @@ const Home: React.FC = () => {
 
         {/* Sección Smartphone */}
         <div className="smartphone-section">
-          <h2 className="section-title">Smartphone</h2>
-          <p className="section-subtitle">
-            Selecciona para filtrar tus opciones
-          </p>
-
+          <h3 className="section-title">Selecciona el tipo que deseas</h3>
+          
           <div className="options-grid">
 
             {/* Android → Samsung */}

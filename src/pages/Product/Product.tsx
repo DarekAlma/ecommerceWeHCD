@@ -36,7 +36,15 @@ const Product: React.FC = () => {
           {/* IMAGEN */}
           <div className="product-image-section">
             <div className="image-box">
-              <p>{celular.marca} {celular.modelo}</p>
+              {celular.imagen ? (
+                <img
+                  src={celular.imagen}
+                  alt={`${celular.marca} ${celular.modelo}`}
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                />
+              ) : (
+                <p>{celular.marca} {celular.modelo}</p>
+              )}
               <div className="image-dots">
                 <span className="dot active"></span>
                 <span className="dot"></span>

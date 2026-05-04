@@ -61,12 +61,9 @@ const ProductoSemilla: React.FC = () => {
         </div>
 
         <div className="ps-smartphone-section">
-          <h2 className="ps-section-title">
+          <h3 className="ps-section-title">
             Smartphones marca {marcaFiltro ? `${marcaFiltro}` : ""}
-          </h2>
-          <p className="ps-section-subtitle">
-            De acuerdo con lo seleccionado, escogimos las mejores opciones para ti
-          </p>
+          </h3>         
 
           {cargando ? (
             <p style={{ textAlign: "center" }}>Cargando dispositivos...</p>
@@ -77,11 +74,19 @@ const ProductoSemilla: React.FC = () => {
               {celulares.map((celular) => (
                 <div className="ps-option-item" key={celular.id}>
                   <div className="ps-option-card">
+                    
                     <div className="ps-option-image">
-                      {/* Imagen placeholder con nombre hasta que haya imágenes */}
-                      <span className="ps-imagen-placeholder">
-                        {celular.marca} {celular.modelo}
-                      </span>
+                      {celular.imagen ? (
+                        <img
+                          src={celular.imagen}
+                          alt={`${celular.marca} ${celular.modelo}`}
+                          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                        />
+                      ) : (
+                        <span className="ps-imagen-placeholder">
+                          {celular.marca} {celular.modelo}
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="ps-option-footer">
