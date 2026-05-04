@@ -9,12 +9,13 @@ html, body {
   padding: 0;
   min-height: 100vh;
 }
+
 .main-content {
   padding: 80px 24px 0 24px;
   min-height: 100vh;
-  width: 80vw;        /* ← ancho del viewport completo, ignora el padre */
+  width: 80vw;
   box-sizing: border-box;
-  margin-top: 2rem;
+  margin-top: 12rem;
 }
 
 /* Esto asegura que el contenido no tape al header */
@@ -102,16 +103,24 @@ html, body {
 .ps-options-grid {
   display: flex;
   flex-direction: row;
-  gap: 60px;
+  gap: 24px;
   margin-bottom: 48px;
-  justify-content: flex-start;
+  justify-content: center;
+  max-width: 100%; /* ← no se sale del padre */
+
 }
 
 .ps-option-item {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 8px;
+  width: 260px;
+  min-width: 0;      /* permite que se encoja */
+  flex-shrink: 1;    /* se encoge si no hay espacio */
+  flex-grow: 0;      /* no crece más de 260px */
 }
+
+
 
 
 
