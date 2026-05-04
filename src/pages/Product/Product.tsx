@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Product.css";
 import Header from "../../components/header/Header";
+import { useParams, useNavigate } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
 const Product: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const [celular, setCelular] = useState<any>(null);
+  const [cargando, setCargando] = useState(true);
+
+  useEffect(() => {
+    if (!id) return;
+    getDoc(doc(db, "celulares", id))
+      .then((snap) => {
+        if (snap.exists()) setCelular({ id: snap.id, ...snap.data() });
+      })
+      .catch((e) => console.error("Error:", e))
+      .finally(() => setCargando(false));
+  }, [id]);
+
+  if (cargando) return <p style={{ textAlign: "center", marginTop: "2rem" }}>Cargando...</p>;
+  if (!celular) return <p style={{ textAlign: "center", marginTop: "2rem" }}>Producto no encontrado.</p>;
+
   return (
     <>
       <Header />
@@ -15,8 +36,7 @@ const Product: React.FC = () => {
           {/* IMAGEN */}
           <div className="product-image-section">
             <div className="image-box">
-              <p>Imagen smartphone</p>
-
+              <p>{celular.marca} {celular.modelo}</p>
               <div className="image-dots">
                 <span className="dot active"></span>
                 <span className="dot"></span>
@@ -27,13 +47,16 @@ const Product: React.FC = () => {
 
           {/* INFO */}
           <div className="product-info-section">
-            <h2 className="product-name">Nombre Dispositivo</h2>
-            <p className="product-price">COP ###</p>
-            <p className="product-description">Descripción</p>
+            <h2 className="product-name">{celular.marca} {celular.modelo}</h2>
+            <p className="product-price">
+              COP {Number(celular.precio_cop).toLocaleString("es-CO")}
+            </p>
+            <p className="product-description">
+              {celular.pantalla} · {celular.almacenamiento_base} · {celular.os}
+            </p>
 
             <button className="add-btn">Agregar al carrito</button>
-
-            <button className="back-btn">←</button>
+            <button className="back-btn" onClick={() => navigate(-1)}>←</button>
           </div>
 
         </div>
@@ -47,13 +70,14 @@ const Product: React.FC = () => {
             {/* IZQUIERDA */}
             <div className="features-column">
               <p className="features-subtitle">Características técnicas</p>
-
               <ul>
-                <li>Medidas (Ancho x Alto x Fondo): 71,5 x 42,2 x 7,5 cm</li>
-                <li>Puertos HDMI: 2</li>
-                <li>Tipo de Pantalla: QLED-QNED</li>
-                <li>Resolución de Pantalla: FHD</li>
-                <li>Tamaño de Pantalla: 32 pulgadas</li>
+                <li>Modelo: {celular.modelo}</li>
+                <li>Año: {celular.año}</li>
+                <li>Pantalla: {celular.pantalla}</li>
+                <li>Almacenamiento: {celular.almacenamiento_base}</li>
+                <li>Sistema operativo: {celular.os}</li>
+                <li>Peso: {celular.peso_g} g</li>
+                <li>Resistencia: {celular.resistencia}</li>
               </ul>
             </div>
 
@@ -63,13 +87,9 @@ const Product: React.FC = () => {
             {/* DERECHA */}
             <div className="features-column">
               <p className="features-subtitle">Características ambientales</p>
-
               <ul>
-                <li>Garantía: 2 años</li>
-                <li>Vida esperada: 8-10 años</li>
-                <li>Facilidad de reparación: Media-Alta (70%)</li>
-                <li>Probabilidad de reciclaje: 85%</li>
-                <li>Huella de carbono: 120 kg CO₂e</li>
+                <li>Huella de carbono: {celular.huella_co2e_kg} kg CO₂e</li>
+                <li>Materiales: {celular.materiales_ambientales}</li>
               </ul>
             </div>
 
