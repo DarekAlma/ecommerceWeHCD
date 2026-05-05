@@ -1,5 +1,3 @@
-// HOME.tsx
-
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Home.css";
@@ -13,8 +11,9 @@ const Home: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const irAProductos = (marca: string) => {
-    navigate("/productosemilla", { state: { marca } });
+  // 🔥 CAMBIO: ahora envía tipo en lugar de marca
+  const irAProductos = (tipo: string) => {
+    navigate("/productosemilla", { state: { tipo } });
   };
 
   const presupuestoInicial =
@@ -37,16 +36,16 @@ const Home: React.FC = () => {
   });
 
   useEffect(() => {
-  const docRef = doc(db, "configuracion", "visibilidad");
+    const docRef = doc(db, "configuracion", "visibilidad");
 
-  const unsubscribe = onSnapshot(docRef, (docSnap) => {
-    if (docSnap.exists()) {
-      setVisibilidad(docSnap.data() as any);
-    }
-  });
+    const unsubscribe = onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setVisibilidad(docSnap.data() as any);
+      }
+    });
 
-  return () => unsubscribe();
-}, []);
+    return () => unsubscribe();
+  }, []);
 
   return (
     <>
@@ -80,7 +79,7 @@ const Home: React.FC = () => {
           
           <div className="options-grid">
 
-            {/* Android → Samsung */}
+            {/* Android */}
             {visibilidad.android && (
             <div className="option-item">
               <div className="option-card">
@@ -95,7 +94,7 @@ const Home: React.FC = () => {
                   className="ver-mas"
                   onClick={(e) => {
                     e.preventDefault();
-                    irAProductos("Samsung");
+                    irAProductos("android"); // 🔥 CAMBIO
                   }}
                 >
                   Ver más
@@ -104,7 +103,7 @@ const Home: React.FC = () => {
             </div>
             )}
 
-            {/* iPhone → Apple */}
+            {/* iPhone */}
             {visibilidad.ios && (
             <div className="option-item">
               <div className="option-card">
@@ -119,7 +118,7 @@ const Home: React.FC = () => {
                   className="ver-mas"
                   onClick={(e) => {
                     e.preventDefault();
-                    irAProductos("Apple");
+                    irAProductos("ios"); // 🔥 CAMBIO
                   }}
                 >
                   Ver más
@@ -143,7 +142,7 @@ const Home: React.FC = () => {
                   className="ver-mas"
                   onClick={(e) => {
                     e.preventDefault();
-                    irAProductos("Modular");
+                    irAProductos("modular"); // 🔥 CAMBIO
                   }}
                 >
                   Ver más

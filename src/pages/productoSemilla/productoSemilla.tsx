@@ -10,6 +10,8 @@ const ProductoSemilla: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // 🔥 NUEVO: tipo + marca (NO se elimina marca)
+  const tipoFiltro = location.state?.tipo || "";
   const marcaFiltro = location.state?.marca || "";
 
   const presupuestoInicial =
@@ -25,19 +27,24 @@ const ProductoSemilla: React.FC = () => {
     getDocs(collection(db, "celulares"))
       .then((snap) => {
         const todos = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-        // Filtra por marca si viene una
+
+        // 🔥 FILTRO CORREGIDO
         const filtrados = todos
           .filter((c: any) => c.visibilidad !== false) // 👈 SOLO VISIBLES
+          .filter((c: any) =>
+            tipoFiltro ? c.tipo === tipoFiltro : true
+          )
           .filter((c: any) =>
             marcaFiltro
               ? c.marca?.toLowerCase() === marcaFiltro.toLowerCase()
               : true
           );
+
         setCelulares(filtrados);
       })
       .catch((e) => console.error("Error:", e))
       .finally(() => setCargando(false));
-  }, [marcaFiltro]);
+  }, [tipoFiltro, marcaFiltro]);
 
   const cambiarPresupuesto = (valor: string) => {
     setPresupuestoSeleccionado(valor);
@@ -63,14 +70,15 @@ const ProductoSemilla: React.FC = () => {
         </div>
 
         <div className="ps-smartphone-section">
+          {/* 🔥 TEXTO CORREGIDO */}
           <h3 className="ps-section-title">
-            Smartphones marca {marcaFiltro ? `${marcaFiltro}` : ""}
+            Smartphones {tipoFiltro ? `tipo ${tipoFiltro}` : marcaFiltro ? `marca ${marcaFiltro}` : ""}
           </h3>         
 
           {cargando ? (
             <p style={{ textAlign: "center" }}>Cargando dispositivos...</p>
           ) : celulares.length === 0 ? (
-            <p style={{ textAlign: "center" }}>No hay productos disponibles para esta marca.</p>
+            <p style={{ textAlign: "center" }}>No hay productos disponibles.</p>
           ) : (
             <div className="ps-options-grid">
               {celulares.map((celular) => (
@@ -100,7 +108,8 @@ const ProductoSemilla: React.FC = () => {
                     </div>
                     <button
                       className="ps-ver-mas"
-                        onClick={() => navigate(`/product/${celular.id}`)}                    >
+                      onClick={() => navigate(`/product/${celular.id}`)}
+                    >
                       Ver más
                     </button>
                   </div>
