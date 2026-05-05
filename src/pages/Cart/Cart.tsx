@@ -4,6 +4,7 @@ import Header from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import { getAuth } from "firebase/auth"; // 🔥 NUEVO
 
 const Cart: React.FC = () => {
 
@@ -15,11 +16,12 @@ const Cart: React.FC = () => {
   // 🔥 NUEVO: presupuesto
   const presupuesto = localStorage.getItem("presupuesto") || "";
 
-  // 🔥 NUEVO: obtener tope del presupuesto
+  // 🔥 NUEVO: obtener tope del presupuesto (CORREGIDO)
   const obtenerTope = () => {
-    if (presupuesto.includes("3")) return Infinity;
-    if (presupuesto.includes("1.800.000")) return 1800000;
-    if (presupuesto.includes("900.000")) return 900000;
+      if (presupuesto.includes("Alta gama")) return null; // 🔥 CAMBIO (antes Infinity)
+      if (presupuesto.includes("Premium")) return 3000000;
+      if (presupuesto.includes("Estándar")) return 1800000;
+      if (presupuesto.includes("Ahorro")) return 900000;
     return 0;
   };
 
@@ -34,9 +36,9 @@ const Cart: React.FC = () => {
   // 🔥 NUEVO: total gastado
   const total = carrito.reduce((acc, p) => acc + Number(p.precio_cop || 0), 0);
 
-  // 🔥 NUEVO: saldo restante
+  // 🔥 NUEVO: saldo restante (CORREGIDO)
   const saldoRestante =
-    tope === Infinity ? "Infinito" : tope - total;
+    tope === null ? "Infinito" : tope - total;
 
   const hasItems = carrito.length > 0;
 
@@ -49,27 +51,38 @@ const Cart: React.FC = () => {
 
   // 🔥 NUEVO: comprar
   const comprar = async () => {
-    if (tope !== Infinity && total > tope) {
+    if (tope !== null && total > tope) { // 🔥 CAMBIO (antes Infinity)
       alert("No puedes comprar, excede tu presupuesto");
       return;
     }
 
     try {
-      // 🔥 IMPORTANTE: usa el ID del usuario (ajústalo si tienes auth)
-      const userId = localStorage.getItem("userId"); 
+      // 🔥 USAR AUTH
+      const auth = getAuth();
+      const user = auth.currentUser;
 
-      if (!userId) {
+      if (!user) {
         alert("Usuario no identificado");
         return;
       }
 
+      const userId = user.uid;
+
       const userRef = doc(db, "usuarios", userId);
 
+      // 🔥 GUARDAR COMPRA CON PRESUPUESTO
       await updateDoc(userRef, {
-        carrito: arrayUnion(...carrito),
+        carrito: arrayUnion(
+          ...carrito.map((item) => ({
+            ...item,
+            tope_presupuesto: tope, // 🔥 NUEVO
+            presupuesto_label: presupuesto, // 🔥 NUEVO
+            fecha_compra: new Date(), // 🔥 NUEVO
+          }))
+        ),
       });
 
-      alert("Compra realizada con éxito 🛒");
+      alert("Compra realizada con éxito");
 
       // limpiar carrito
       localStorage.removeItem("carrito");
