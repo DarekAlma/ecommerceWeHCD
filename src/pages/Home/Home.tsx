@@ -49,6 +49,7 @@ const Home: React.FC = () => {
 
   return (
     <>
+    <div className="contenedor-home">
       <Header />
 
       <main className="main-content">
@@ -154,6 +155,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </main>
+      </div>
     </>
   );
 };

@@ -28,13 +28,6 @@ const Header: React.FC = () => {
         </span>
 
         <span 
-          className={`header__link ${location.pathname === "/product" ? "active" : ""}`}
-          onClick={() => navigate("/product")}
-        >
-          Productos
-        </span>
-
-        <span 
           className={`header__link ${location.pathname.startsWith("/survey") ? "active" : ""}`}
           onClick={() => navigate("/survey")}
         >

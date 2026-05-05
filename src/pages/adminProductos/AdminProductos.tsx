@@ -3,8 +3,11 @@ import "./AdminProductos.css";
 import HeaderAdmin from "../../components/headeradmin/HeaderAdmin";
 import { collection, onSnapshot, doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import { useNavigate } from "react-router-dom";
 
 const AdminProductos: React.FC = () => {
+
+    const navigate = useNavigate();
 
   const [productos, setProductos] = useState<any[]>([]);
 
@@ -207,7 +210,10 @@ const AdminProductos: React.FC = () => {
                 </p>
               </div>
 
-              <button className="edit-btn-admin-productos">
+              <button
+                className="edit-btn-admin-productos"
+                onClick={() => navigate(`/admin/productos/edit/${p.id}`)}  
+                >
                 Editar
               </button>
             </div>

@@ -10,7 +10,6 @@ const ProductoSemilla: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // 🔥 NUEVO: tipo + marca (NO se elimina marca)
   const tipoFiltro = location.state?.tipo || "";
   const marcaFiltro = location.state?.marca || "";
 
@@ -30,7 +29,7 @@ const ProductoSemilla: React.FC = () => {
 
         // 🔥 FILTRO CORREGIDO
         const filtrados = todos
-          .filter((c: any) => c.visibilidad !== false) // 👈 SOLO VISIBLES
+          .filter((c: any) => c.visibilidad !== false) 
           .filter((c: any) =>
             tipoFiltro ? c.tipo === tipoFiltro : true
           )
@@ -70,7 +69,7 @@ const ProductoSemilla: React.FC = () => {
         </div>
 
         <div className="ps-smartphone-section">
-          {/* 🔥 TEXTO CORREGIDO */}
+          {/* TEXTO CORREGIDO */}
           <h3 className="ps-section-title">
             Smartphones {tipoFiltro ? `tipo ${tipoFiltro}` : marcaFiltro ? `marca ${marcaFiltro}` : ""}
           </h3>         

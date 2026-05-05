@@ -10,12 +10,24 @@ html, body {
   padding: 0;
   min-height: 100vh;
 }
+
+.contenedor-home {
+  height: 100vh;
+  width: 100vw;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 4rem;
+}
+
 .main-content {
-  padding: 80px 24px 0 24px;
-  min-height: 100vh;
-  width: 80vw;        /* ← ancho del viewport completo, ignora el padre */
+  padding: 100px 24px 0 24px;
+  min-height: 100vh;      /* ← ancho del viewport completo, ignora el padre */
   box-sizing: border-box;
-  margin-top: 2rem;
 }
 
 /* Esto asegura que el contenido no tape al header */
@@ -171,3 +183,6 @@ html, body {
   text-decoration: underline;
 }
 
+.ps-section-title {
+  padding-bottom: 1rem;
+}
