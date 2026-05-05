@@ -30,7 +30,7 @@ html, body {
   padding: 20px;
 }
 .hero-banner {
-  background-color: #d4e8d4;
+  background-color: #C8DCC1;
   border-radius: 20px;
   padding: 0px 10px;
   display: flex;
@@ -209,15 +209,17 @@ html, body {
 }
 
 .ps-back-btn {
-  background-color: #d4e8d4;
+  background-color: #eff5ec;
   border: none;
   border-radius: 10px;
   padding: 10px 18px;
   font-size: 1.2rem;
   cursor: pointer;
   transition: background 0.2s ease;
+  margin-bottom: 2rem;
 }
 
 .ps-back-btn:hover {
   background-color: #b8d8b8;
 }
+

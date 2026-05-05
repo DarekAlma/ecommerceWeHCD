@@ -5,7 +5,7 @@
 
 /* CONTENEDOR */
 .profile-container-admin {
-  background: #b7c8b1;
+  background: #C8DCC1;
   border-radius: 20px;
   width: 80vw;
   max-width: 1400px;
@@ -56,7 +56,7 @@
 
 .main-btn-admin {
   background: #1c1c1c;
-  color: #b7c8b1;
+  color: #C8DCC1;
   border: none;
   padding: 12px 20px;
   border-radius: 10px;

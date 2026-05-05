@@ -1,11 +1,14 @@
 .cart-main {
-  padding: 120px 0 40px 0;
   width: 100%;
+  padding: 0px 24px 0 24px;
+  min-height: 100vh;      /* ← ancho del viewport completo, ignora el padre */
+  box-sizing: border-box;
+  margin-top: 12rem;
 }
 
 /* CONTENEDOR PRINCIPAL */
 .cart-container {
-  background: #b7c8b1;
+  background: #C8DCC1;
   border-radius: 20px;
   padding: 40px;
   margin: 0 auto 30px auto;
@@ -34,12 +37,15 @@
 
 /* CONTENIDO */
 .cart-content {
-  background: #f5f5f5;
+  background: white;
   border-radius: 16px;
   min-height: 250px;
   padding: 25px;
   color: #333;
   font-size: 1.1rem;
+
+  max-height: 400px; /* 👈 ajusta para ~3 productos */
+  overflow-y: auto;
 }
 
 /* CUANDO HAY PRODUCTOS */
@@ -58,8 +64,8 @@
 
 /* LÍNEA DIVISORIA */
 .cart-divider {
-  height: 1px;
-  background: #ccc;
+  height: 2px;
+  background: #eee;
   margin: 10px 0;
 }
 
@@ -81,7 +87,7 @@
 .cart-product-image {
   width: 70px;
   height: 70px;
-  border: 1px solid #aaa;
+  border: 2px solid #eee;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -105,9 +111,10 @@
 
 /* QUITAR */
 .cart-remove {
-  font-size: 0.85rem;
-  color: #555;
+  font-size: 0.8rem;
+  color: #507850;
   cursor: pointer;
+  background-color: white;
 }
 
 .cart-remove:hover {
@@ -133,12 +140,13 @@
 /* BOTONES */
 .buy-btn {
   background: #1c1c1c;
-  color: #b7c8b1;
+  color: #C8DCC1;
   border: none;
   padding: 12px 24px;
   border-radius: 12px;
   cursor: pointer;
   font-weight: 600;
+  margin-bottom: 3rem;
 }
 
 .buy-btn:hover {
@@ -147,8 +155,9 @@
 
 .back-btn {
   border: none;
-  background: #e0e0e0;
+  background: #eff5ec;
   padding: 10px 16px;
   border-radius: 10px;
   cursor: pointer;
+  margin-bottom: 3rem;
 }

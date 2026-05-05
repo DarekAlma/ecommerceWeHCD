@@ -52,6 +52,7 @@ const ProductoSemilla: React.FC = () => {
 
   return (
     <>
+    <div className="contenedor-home">
       <Header />
       <main className="main-content">
         <div className="hero-banner">
@@ -122,6 +123,7 @@ const ProductoSemilla: React.FC = () => {
           <button className="ps-back-btn" onClick={() => navigate(-1)}>←</button>
         </div>
       </main>
+      </div>
     </>
   );
 };

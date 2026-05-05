@@ -39,6 +39,28 @@ const Product: React.FC = () => {
       .catch((e) => console.error("Error cargando características:", e));
   }, []);
 
+  // 🔥 NUEVO: AGREGAR AL CARRITO
+  const agregarAlCarrito = () => {
+    if (!celular) return;
+
+    const carritoActual = JSON.parse(localStorage.getItem("carrito") || "[]");
+
+    // evitar duplicados
+    const existe = carritoActual.some((p: any) => p.id === celular.id);
+
+    if (existe) {
+      alert("Este producto ya está en el carrito");
+      return;
+    }
+
+    const nuevoCarrito = [...carritoActual, celular];
+
+    localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
+
+    alert("Producto agregado al carrito");
+    navigate("/cart");
+  };
+
   if (cargando)
     return <p style={{ textAlign: "center", marginTop: "2rem" }}>Cargando...</p>;
 
@@ -97,7 +119,10 @@ const Product: React.FC = () => {
               {celular.pantalla} · {celular.almacenamiento_base} · {celular.os}
             </p>
 
-            <button className="add-btn">Agregar al carrito</button>
+            {/* 🔥 MODIFICADO */}
+            <button className="add-btn" onClick={agregarAlCarrito}>
+              Agregar al carrito
+            </button>
 
             <button className="back-btn" onClick={() => navigate(-1)}>
               ←

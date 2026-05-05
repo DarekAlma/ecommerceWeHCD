@@ -25,7 +25,7 @@ html, body {
 }
 
 .main-content {
-  padding: 100px 24px 0 24px;
+  padding: 0px 24px 0 24px;
   min-height: 100vh;      /* ← ancho del viewport completo, ignora el padre */
   box-sizing: border-box;
 }
@@ -112,8 +112,7 @@ html, body {
 /* Reemplaza el .options-grid existente */
 .options-grid {
   display: flex;
-  justify-content: center;
-  gap: 100px;
+  justify-content: space-between;
   flex-wrap: wrap;
   margin-bottom: 60px;
   align-items: flex-start;
@@ -125,6 +124,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  margin-bottom: 2rem;
 }
 .option-card {
   background: white;
@@ -185,4 +185,9 @@ html, body {
 
 .ps-section-title {
   padding-bottom: 1rem;
+}
+
+.section-title {
+  margin-bottom: 2rem; 
+  margin-top: 2rem;
 }
