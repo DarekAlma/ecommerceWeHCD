@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import type { SurveyAnswer, SurveySection } from '../types/survey';
+import { useState, useEffect } from 'react';
+import type { SurveyAnswer, SurveySection, PetState, FlowStep, SurveyProgress } from '../types/survey';
+import { cargarProgreso, guardarProgreso } from '../firebase/survey';
 
 export const SURVEY_SECTIONS: SurveySection[] = [
   {
@@ -72,7 +73,7 @@ export const SURVEY_SECTIONS: SurveySection[] = [
   },
 ];
 
-type FlowStep = 'intro' | 'section' | 'thanks';
+const PET_STATES_BY_SECTION: PetState[] = ['semilla', 'tallo', 'petalo', 'flor'];
 
 interface FlowState {
   step: FlowStep;
@@ -83,15 +84,70 @@ interface FlowState {
   validationError: string;
 }
 
-export function useSurveyFlow() {
-  const [state, setState] = useState<FlowState>({
-    step: 'intro',
-    sectionIndex: 0,
-    answers: [],
-    mascotName: '',
-    mascotNamed: false,
+const INITIAL_STATE: FlowState = {
+  step: 'intro',
+  sectionIndex: 0,
+  answers: [],
+  mascotName: '',
+  mascotNamed: false,
+  validationError: '',
+};
+
+function derivePetState(s: FlowState): PetState {
+  if (s.step === 'thanks') return 'flor';
+  if (s.step === 'intro') return s.answers.length > 0 ? 'tallo' : 'semilla';
+  return PET_STATES_BY_SECTION[s.sectionIndex] ?? 'semilla';
+}
+
+function buildProgress(s: FlowState): SurveyProgress {
+  const answers: Record<string, string> = {};
+  s.answers.forEach(a => { answers[a.questionId] = a.answer; });
+  return {
+    answers,
+    currentStep: s.sectionIndex,
+    completed: s.step === 'thanks',
+    petState: derivePetState(s),
+    step: s.step,
+    mascotName: s.mascotName,
+    mascotNamed: s.mascotNamed,
+  };
+}
+
+function restoreState(progress: SurveyProgress): FlowState {
+  const answers: SurveyAnswer[] = Object.entries(progress.answers).map(
+    ([questionId, answer]) => ({ questionId, answer })
+  );
+  return {
+    step: progress.step ?? 'intro',
+    sectionIndex: progress.currentStep ?? 0,
+    answers,
+    mascotName: progress.mascotName ?? '',
+    mascotNamed: progress.mascotNamed ?? false,
     validationError: '',
-  });
+  };
+}
+
+export function useSurveyFlow(uid: string | null) {
+  const [state, setState] = useState<FlowState>(INITIAL_STATE);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!uid) {
+      setLoading(false);
+      return;
+    }
+    cargarProgreso(uid)
+      .then(progress => {
+        if (progress) setState(restoreState(progress));
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, [uid]);
+
+  const save = (next: FlowState) => {
+    if (!uid) return;
+    guardarProgreso(uid, buildProgress(next)).catch(console.error);
+  };
 
   const isStarted = state.answers.length > 0;
   const currentSection = SURVEY_SECTIONS[state.sectionIndex];
@@ -108,8 +164,13 @@ export function useSurveyFlow() {
 
   const setAnswer = (questionId: string, answer: string) => {
     setState(prev => {
-      const next = prev.answers.filter(a => a.questionId !== questionId);
-      return { ...prev, answers: [...next, { questionId, answer }], validationError: '' };
+      const next: FlowState = {
+        ...prev,
+        answers: [...prev.answers.filter(a => a.questionId !== questionId), { questionId, answer }],
+        validationError: '',
+      };
+      save(next);
+      return next;
     });
   };
 
@@ -119,38 +180,36 @@ export function useSurveyFlow() {
   };
 
   const startSurvey = () => {
-    setState(prev => ({ ...prev, step: 'section', sectionIndex: 0 }));
+    setState(prev => {
+      const next: FlowState = { ...prev, step: 'section', sectionIndex: 0 };
+      save(next);
+      return next;
+    });
   };
 
   const nextSection = () => {
     if (!canAdvanceSection()) {
-      setState(prev => ({
-        ...prev,
-        validationError: 'Por favor responde todas las preguntas antes de continuar.',
-      }));
+      setState(prev => ({ ...prev, validationError: 'Por favor responde todas las preguntas antes de continuar.' }));
       return;
     }
-    if (state.sectionIndex < totalSections - 1) {
-      setState(prev => ({
-        ...prev,
-        sectionIndex: prev.sectionIndex + 1,
-        validationError: '',
-      }));
-    } else {
-      setState(prev => ({ ...prev, step: 'thanks', validationError: '' }));
-    }
+    setState(prev => {
+      const isLast = prev.sectionIndex >= totalSections - 1;
+      const next: FlowState = isLast
+        ? { ...prev, step: 'thanks', validationError: '' }
+        : { ...prev, sectionIndex: prev.sectionIndex + 1, validationError: '' };
+      save(next);
+      return next;
+    });
   };
 
   const prevSection = () => {
-    if (state.sectionIndex > 0) {
-      setState(prev => ({
-        ...prev,
-        sectionIndex: prev.sectionIndex - 1,
-        validationError: '',
-      }));
-    } else {
-      setState(prev => ({ ...prev, step: 'intro', validationError: '' }));
-    }
+    setState(prev => {
+      const next: FlowState = prev.sectionIndex > 0
+        ? { ...prev, sectionIndex: prev.sectionIndex - 1, validationError: '' }
+        : { ...prev, step: 'intro', validationError: '' };
+      save(next);
+      return next;
+    });
   };
 
   const setMascotName = (name: string) => {
@@ -159,7 +218,11 @@ export function useSurveyFlow() {
 
   const confirmMascotName = () => {
     if (state.mascotName.trim() === '') return;
-    setState(prev => ({ ...prev, mascotNamed: true }));
+    setState(prev => {
+      const next: FlowState = { ...prev, mascotNamed: true };
+      save(next);
+      return next;
+    });
   };
 
   const getSurveyPayload = () => ({
@@ -170,6 +233,7 @@ export function useSurveyFlow() {
 
   return {
     state,
+    loading,
     isStarted,
     currentSection,
     totalSections,

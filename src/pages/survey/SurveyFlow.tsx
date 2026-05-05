@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/header/Header';
 import { useSurveyFlow } from '../../hooks/useSurveyFlow';
+import { escucharSesion } from '../../firebase/auth';
 import type { SurveySection } from '../../types/survey';
 import './SurveyFlow.css';
 
@@ -169,8 +170,16 @@ const ThanksScreen: React.FC<ThanksScreenProps> = ({
 
 const SurveyFlow: React.FC = () => {
   const navigate = useNavigate();
+  const [uid, setUid] = useState<string | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = escucharSesion(user => setUid(user?.uid ?? null));
+    return () => unsubscribe();
+  }, []);
+
   const {
     state,
+    loading,
     isStarted,
     currentSection,
     totalSections,
@@ -182,7 +191,22 @@ const SurveyFlow: React.FC = () => {
     prevSection,
     setMascotName,
     confirmMascotName,
-  } = useSurveyFlow();
+  } = useSurveyFlow(uid);
+
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <main className="sf-page">
+          <div className="sf-card">
+            <div className="sf-inner" style={{ justifyContent: 'center', alignItems: 'center' }}>
+              <p className="sf-text">Cargando encuesta...</p>
+            </div>
+          </div>
+        </main>
+      </>
+    );
+  }
 
   return (
     <>
