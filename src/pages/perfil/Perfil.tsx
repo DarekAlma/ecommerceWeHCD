@@ -5,14 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { cerrarSesion, escucharSesion } from "../../firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import type { PetState } from "../../types/survey";
 
 const Perfil: React.FC = () => {
   const navigate = useNavigate();
 
   const [usuario, setUsuario] = useState<string>("");
   const [correo, setCorreo] = useState<string>("");
-  const [nivelMascota, setNivelMascota] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true); 
+  const [petState, setPetState] = useState<PetState>("semilla");
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const unsubscribe = escucharSesion(async (user) => {
@@ -29,9 +30,8 @@ const Perfil: React.FC = () => {
 
         if (snap.exists()) {
           const data = snap.data();
-
           setUsuario(data.nombre || "Usuario");
-          setNivelMascota(data.nivelMascota || "1");
+          setPetState((data.survey?.petState as PetState) ?? "semilla");
         }
       } catch (error) {
         console.error(error);
@@ -87,7 +87,7 @@ const Perfil: React.FC = () => {
             </p>
 
             <p>
-              <span>Nivel de mi mascota:</span> {nivelMascota}
+              <span>Nivel de mi mascota:</span> {petState}
             </p>
           </div>
 
@@ -113,7 +113,7 @@ const Perfil: React.FC = () => {
         <div className="image-section-perfil">
           <div className="image-container-perfil">
             <img
-              src={nivelMascota === "1" ? "/semilla.png" : "/flor.png"}
+              src={`/${petState}.png`}
               alt="mascota"
             />
           </div>

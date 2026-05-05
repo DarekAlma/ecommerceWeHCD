@@ -169,8 +169,10 @@ const ThanksScreen: React.FC<ThanksScreenProps> = ({
 
 const SurveyFlow: React.FC = () => {
   const navigate = useNavigate();
+
   const {
     state,
+    loading,
     isStarted,
     currentSection,
     totalSections,
@@ -183,6 +185,21 @@ const SurveyFlow: React.FC = () => {
     setMascotName,
     confirmMascotName,
   } = useSurveyFlow();
+
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <main className="sf-page">
+          <div className="sf-card">
+            <div className="sf-inner" style={{ justifyContent: 'center', alignItems: 'center' }}>
+              <p className="sf-text">Cargando encuesta...</p>
+            </div>
+          </div>
+        </main>
+      </>
+    );
+  }
 
   return (
     <>
