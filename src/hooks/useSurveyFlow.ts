@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import type { SurveyAnswer, SurveySection, PetState, FlowStep, SurveyProgress } from '../types/survey';
 import { cargarProgreso, guardarProgreso } from '../firebase/survey';
+import { escucharSesion } from '../firebase/auth';
+import { auth } from '../firebase/config';
 
 export const SURVEY_SECTIONS: SurveySection[] = [
   {
@@ -127,24 +129,38 @@ function restoreState(progress: SurveyProgress): FlowState {
   };
 }
 
-export function useSurveyFlow(uid: string | null) {
+export function useSurveyFlow() {
   const [state, setState] = useState<FlowState>(INITIAL_STATE);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!uid) {
-      setLoading(false);
-      return;
-    }
-    cargarProgreso(uid)
-      .then(progress => {
-        if (progress) setState(restoreState(progress));
-      })
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, [uid]);
+    // Un único efecto que espera la sesión y luego carga Firebase.
+    // Dependencias vacías: corre una sola vez, sin ventanas de tiempo.
+    const unsubscribe = escucharSesion(user => {
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+      cargarProgreso(user.uid)
+        .then(progress => {
+          // setState y setLoading en el mismo callback → React los batchea
+          // en un único render, eliminando cualquier flash intermedio.
+          if (progress) setState(restoreState(progress));
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error(err);
+          setLoading(false);
+        });
+    });
+    return () => unsubscribe();
+  }, []);
 
+  // Usa auth.currentUser (sincrónico) para el uid en saves.
+  // Siempre disponible aquí porque save solo se llama tras interacción del usuario,
+  // momento en que la sesión ya fue resuelta.
   const save = (next: FlowState) => {
+    const uid = auth.currentUser?.uid;
     if (!uid) return;
     guardarProgreso(uid, buildProgress(next)).catch(console.error);
   };

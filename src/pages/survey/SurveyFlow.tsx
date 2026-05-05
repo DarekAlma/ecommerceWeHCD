@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/header/Header';
 import { useSurveyFlow } from '../../hooks/useSurveyFlow';
-import { escucharSesion } from '../../firebase/auth';
 import type { SurveySection } from '../../types/survey';
 import './SurveyFlow.css';
 
@@ -170,12 +169,6 @@ const ThanksScreen: React.FC<ThanksScreenProps> = ({
 
 const SurveyFlow: React.FC = () => {
   const navigate = useNavigate();
-  const [uid, setUid] = useState<string | null>(null);
-
-  useEffect(() => {
-    const unsubscribe = escucharSesion(user => setUid(user?.uid ?? null));
-    return () => unsubscribe();
-  }, []);
 
   const {
     state,
@@ -191,7 +184,7 @@ const SurveyFlow: React.FC = () => {
     prevSection,
     setMascotName,
     confirmMascotName,
-  } = useSurveyFlow(uid);
+  } = useSurveyFlow();
 
   if (loading) {
     return (
