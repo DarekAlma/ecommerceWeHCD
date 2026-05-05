@@ -1,0 +1,212 @@
+/* Reset y fix para header fijo */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+.main-content-admin {
+  padding: 100px 24px 0 24px;
+  min-height: 100vh;      /* ← ancho del viewport completo, ignora el padre */
+  box-sizing: border-box;
+}
+
+/* Esto asegura que el contenido no tape al header */
+.bloom-container-admin {
+  padding-top: 80px;   /* ← Cambia según la altura real de tu header (70px + margen) */
+  min-height: 100vh;
+}
+
+.bloom-container-admin {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.hero-banner-admin {
+  background-color: #c7dcc0;
+  border-radius: 20px;
+  padding: 30px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 60px;
+  position: relative;
+  max-width: 100%;   /* ← antes era 1450px, ahora se adapta al contenedor */
+  
+}
+
+.hero-content-admin {
+  max-width: 500px;
+  padding-left: 23px;
+  padding-bottom: 40px;
+  padding-top: 40px;
+}
+
+.bloom-title-admin {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin: 0;
+  color: #1e1e1e;
+}
+
+.hero-subtitle-admin {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e1e1e;
+}
+
+.hero-description-admin {
+  font-size: 0.8rem;
+  color: #1e1e1e;
+  margin-bottom: 25px;
+}
+
+.happy-circle-admin {
+  width: 220px;
+  height: 220px;
+  flex-shrink: 0;
+}
+
+.happy-image-admin {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Sección Smartphone */
+.smartphone-section-admin {
+  text-align: center;
+}
+
+.section-title-admin {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+  margin-top: -2%;
+}
+
+.section-subtitle-admin {
+  color: #1e1e1e;
+  margin-bottom: 40px;
+}
+
+/* Reemplaza el .options-grid existente */
+.options-grid-admin {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+  align-items: flex-start;
+}
+
+/* Agrega esto nuevo */
+.option-item-admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.option-card-admin {
+  background: white;
+  border: 2px solid #eee;
+  border-radius: 16px;
+  width: 220px;
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.option-image-admin {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.brand-logo-admin {
+  max-height: 90px;
+  width: auto;
+}
+
+/* Agrega esto nuevo */
+.option-footer-admin {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 220px;
+  padding: 0 4px;
+}
+
+/* Reemplaza el .option-name existente */
+.option-name-admin {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 5rem;
+}
+
+.contenedor-admin-home {
+  height: 100vh;
+  width: 100vw;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 4rem;
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+
+  background: #c8dcc1;
+  border: none;
+  border-radius: 0.4rem;
+
+  width: 2.2rem;   /* tamaño fijo del botón */
+  height: 1.7rem;
+
+  display: flex;           /* 🔥 clave */
+  align-items: center;     /* vertical */
+  justify-content: center; /* horizontal */
+
+  cursor: pointer;
+  padding: 0; /* 🔥 importante para evitar desalineación */
+}
+
+.icon-toggle {
+  width: 65%;
+  height: 65%;
+  object-fit: contain;
+}
+
+.option-card-admin {
+  position: relative;
+}
+
+/* estado oculto */
+.option-card-admin.oculto {
+  position: relative;
+}
+
+/* capa oscura encima */
+.option-card-admin.oculto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* intensidad */
+  border-radius: inherit;
+}

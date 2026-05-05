@@ -24,9 +24,14 @@ const Login: React.FC = () => {
     try {
       setLoading(true);
 
-      await iniciarSesion(email, password);
+      const user = await iniciarSesion(email, password);
 
-      navigate("/start");
+      if (user.email === "admin@bloommarket.com") {
+        navigate("/admin/home", { replace: true });
+      } else {
+        navigate("/start", { replace: true });
+      }
+
     } catch (error: any) {
       console.error(error);
 
@@ -54,7 +59,6 @@ const Login: React.FC = () => {
 
     try {
       await sendPasswordResetEmail(auth, email);
-
       alert("Revisa tu correo para restablecer tu contraseña");
     } catch (error: any) {
       if (error.code === "auth/user-not-found") {

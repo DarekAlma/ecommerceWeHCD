@@ -1,10 +1,10 @@
-.profile-main {
+.profile-main-admin {
   padding: 120px 0 40px 0;
   width: 100%;
 }
 
 /* CONTENEDOR */
-.profile-container {
+.profile-container-admin {
   background: #b7c8b1;
   border-radius: 20px;
   width: 80vw;
@@ -18,35 +18,35 @@
 }
 
 /* IZQUIERDA */
-.profile-info {
+.profile-info-admin {
   max-width: 500px;
 }
 
-.profile-title {
+.profile-title-admin {
   font-size: 3rem;
   font-weight: 900;
   margin-bottom: 10px;
 }
 
-.profile-subtitle {
+.profile-subtitle-admin {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 20px;
 }
 
 /* DATOS */
-.profile-data p {
+.profile-data-admin p {
   margin-bottom: 8px;
   color: #2f2f2f;
 }
 
-.admin-text {
+.admin-text-admin {
   font-style: italic;
   font-weight: 600;
 }
 
 /* BOTONES */
-.profile-buttons {
+.profile-buttons-admin {
   margin-top: 25px;
   display: flex;
   flex-direction: column;
@@ -54,7 +54,7 @@
   width: 260px; /* 🔥 ancho fijo */
 }
 
-.main-btn {
+.main-btn-admin {
   background: #1c1c1c;
   color: #b7c8b1;
   border: none;
@@ -65,7 +65,7 @@
   width: 100%; /* 🔥 ocupa todo el ancho del contenedor */
 }
 
-.main-btn:hover {
+.main-btn-admin:hover {
   background: #333;
 }
 
@@ -80,12 +80,12 @@
   width: 100%;
 }
 
-.logout-btn:hover {
+.logout-btn-admin:hover {
   background: #d65c5c;
 }
 
 /* DERECHA */
-.profile-image {
+.profile-image-admin {
   width: 400px;
   height: 400px;
   background: #1c1c1c;
@@ -99,7 +99,7 @@
   overflow: visible; /* permite sobresalir arriba/lados */
 }
 
-.profile-image img {
+.profile-image-admin img {
   width: 70%; /* 🔥 más grande para que sobresalga */
   object-fit: contain;
 

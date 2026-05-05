@@ -1,6 +1,7 @@
 import React from "react";
 import "./Error.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import { auth } from "../../firebase/config";
 
 const Error: React.FC = () => {
   const navigate = useNavigate();
@@ -20,7 +21,18 @@ const Error: React.FC = () => {
       : "Ha ocurrido un error";
 
   const handleInicio = () => {
-    navigate("/start");
+    const user = auth.currentUser;
+
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
+    if (user.email === "admin@bloommarket.com") {
+      navigate("/admin/home"); // ✅ ADMIN
+    } else {
+      navigate("/home"); // ✅ USER
+    }
   };
 
   return (

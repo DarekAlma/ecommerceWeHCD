@@ -1,17 +1,19 @@
-// HOME.tsx
-
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Home.css";
 import Header from "../../components/header/Header";
 import PresupuestoSelector from "../../components/presupuestoselector/PresupuestoSelector";
+import { useEffect } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
 const Home: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const irAProductos = (marca: string) => {
-    navigate("/productosemilla", { state: { marca } });
+  // 🔥 CAMBIO: ahora envía tipo en lugar de marca
+  const irAProductos = (tipo: string) => {
+    navigate("/productosemilla", { state: { tipo } });
   };
 
   const presupuestoInicial =
@@ -26,6 +28,24 @@ const Home: React.FC = () => {
     setPresupuestoSeleccionado(valor);
     localStorage.setItem("presupuesto", valor);
   };
+
+  const [visibilidad, setVisibilidad] = useState({
+    android: true,
+    ios: true,
+    modular: true,
+  });
+
+  useEffect(() => {
+    const docRef = doc(db, "configuracion", "visibilidad");
+
+    const unsubscribe = onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setVisibilidad(docSnap.data() as any);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <>
@@ -59,7 +79,8 @@ const Home: React.FC = () => {
           
           <div className="options-grid">
 
-            {/* Android → Samsung */}
+            {/* Android */}
+            {visibilidad.android && (
             <div className="option-item">
               <div className="option-card">
                 <div className="option-image">
@@ -73,15 +94,17 @@ const Home: React.FC = () => {
                   className="ver-mas"
                   onClick={(e) => {
                     e.preventDefault();
-                    irAProductos("Samsung");
+                    irAProductos("android"); // 🔥 CAMBIO
                   }}
                 >
                   Ver más
                 </a>
               </div>
             </div>
+            )}
 
-            {/* iPhone → Apple */}
+            {/* iPhone */}
+            {visibilidad.ios && (
             <div className="option-item">
               <div className="option-card">
                 <div className="option-image">
@@ -95,15 +118,17 @@ const Home: React.FC = () => {
                   className="ver-mas"
                   onClick={(e) => {
                     e.preventDefault();
-                    irAProductos("Apple");
+                    irAProductos("ios"); // 🔥 CAMBIO
                   }}
                 >
                   Ver más
                 </a>
               </div>
             </div>
+            )}
 
             {/* Modular */}
+            {visibilidad.modular && (
             <div className="option-item">
               <div className="option-card">
                 <div className="option-image">
@@ -117,13 +142,14 @@ const Home: React.FC = () => {
                   className="ver-mas"
                   onClick={(e) => {
                     e.preventDefault();
-                    irAProductos("Modular");
+                    irAProductos("modular"); // 🔥 CAMBIO
                   }}
                 >
                   Ver más
                 </a>
               </div>
             </div>
+            )}
 
           </div>
         </div>
