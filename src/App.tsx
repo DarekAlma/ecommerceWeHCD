@@ -25,6 +25,7 @@ import AdminHome from "./pages/adminHome/AdminHome";
 import SurveyFlow from "./pages/survey/SurveyFlow";
 
 import { escucharSesion } from "./firebase/auth";
+import AdminProductos from "./pages/adminProductos/AdminProductos";
 
 function RutaProtegida({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any>(undefined);
@@ -237,6 +238,15 @@ function App() {
           element={
             <RutaAdmin>
               <AdminHome />
+            </RutaAdmin>
+          }
+        />
+
+        <Route
+          path="/admin/productos"
+          element={
+            <RutaAdmin>
+              <AdminProductos />
             </RutaAdmin>
           }
         />

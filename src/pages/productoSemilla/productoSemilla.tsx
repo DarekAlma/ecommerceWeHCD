@@ -26,11 +26,13 @@ const ProductoSemilla: React.FC = () => {
       .then((snap) => {
         const todos = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
         // Filtra por marca si viene una
-        const filtrados = marcaFiltro
-          ? todos.filter((c: any) =>
-              c.marca?.toLowerCase() === marcaFiltro.toLowerCase()
-            )
-          : todos;
+        const filtrados = todos
+          .filter((c: any) => c.visibilidad !== false) // 👈 SOLO VISIBLES
+          .filter((c: any) =>
+            marcaFiltro
+              ? c.marca?.toLowerCase() === marcaFiltro.toLowerCase()
+              : true
+          );
         setCelulares(filtrados);
       })
       .catch((e) => console.error("Error:", e))
