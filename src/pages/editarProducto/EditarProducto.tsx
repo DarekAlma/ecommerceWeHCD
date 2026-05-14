@@ -186,7 +186,10 @@ const EditarProducto: React.FC = () => {
               Editar imagen
             </button>
 
-            <button className="editar-btn-verde">
+            <button
+              className="editar-btn-verde"
+              onClick={() => navigate(`/admin/product/${id}/features`)}
+            >
               Editar o agregar características
             </button>
 

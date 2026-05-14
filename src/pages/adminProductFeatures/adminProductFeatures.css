@@ -1,0 +1,196 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* MAIN */
+.admin-product-main {
+  padding-top: 400px; /* 🔥 espacio para el header */
+  padding-bottom: 40px;
+
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+}
+
+/* CONTENEDOR GENERAL */
+.admin-product-container {
+  width: 85%;
+  max-width: 1400px;
+
+  display: flex;
+  gap: 50px;
+
+  align-items: flex-start;
+}
+
+/* IZQUIERDA */
+.features-list-section {
+  flex: 1;
+}
+
+/* TITULO */
+.features-main-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+/* GRUPOS */
+.feature-group {
+  margin-bottom: 50px;
+}
+
+.feature-group-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* ITEMS */
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 22px;
+
+  font-size: 1rem;
+  color: #557748;
+  font-weight: 600;
+}
+
+.feature-item input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* BOTON BORRAR */
+.delete-btn {
+  margin-top: 5px;
+
+  background: #b7c8b1;
+  border: none;
+
+  padding: 12px 24px;
+  border-radius: 10px;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  opacity: 0.9;
+}
+
+/* BACK */
+.back-btn {
+  margin-left: 30px;
+
+  width: 50px;
+  height: 50px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #e5e5e5;
+
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+/* DERECHA */
+.new-feature-card {
+  width: 420px;
+  flex-shrink: 0;
+
+  background: #b7c8b1;
+
+  border-radius: 24px;
+
+  padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* TITULO */
+.new-feature-title {
+  font-size: 2rem;
+  font-weight: 700;
+
+  margin-bottom: 40px;
+}
+
+/* INPUTS */
+.input-group {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 28px;
+}
+
+.input-group label {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.input-group input,
+.input-group select {
+  height: 56px;
+
+  border: none;
+  border-radius: 12px;
+
+  padding: 0 18px;
+
+  font-size: 1rem;
+}
+
+/* BOTON CREAR */
+.create-btn {
+  margin-top: 10px;
+
+  width: 110px;
+  height: 50px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #1c1c1c;
+  color: white;
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .admin-product-container {
+    flex-direction: column;
+  }
+
+  .new-feature-card {
+    width: 100%;
+  }
+}
+
+/* 🔥 FIX inputs gigantes */
+.new-feature-card .input-group input,
+.new-feature-card .input-group select {
+  width: 100%;
+  max-width: 100%;
+
+  box-sizing: border-box;
+}
+
+/* evita overflow horizontal */
+.new-feature-card {
+  overflow: hidden;
+}
