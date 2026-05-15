@@ -27,7 +27,7 @@ import SurveyFlow from "./pages/survey/SurveyFlow";
 import { escucharSesion } from "./firebase/auth";
 import AdminProductos from "./pages/adminProductos/AdminProductos";
 import EditarProducto from "./pages/editarProducto/EditarProducto";
-import AdminProductFeatures from "./pages/adminProductFeatures/AdminProductFeatures";
+import AdminProductFeatures from "./pages/adminProductFeatures/adminProductFeatures";
 
 function RutaProtegida({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any>(undefined);
