@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./AdminProductFeatures.css";
+import "./adminProductFeatures.css";
 import HeaderAdmin from "../../components/headeradmin/HeaderAdmin";
 
 import { useNavigate, useParams } from "react-router-dom";
